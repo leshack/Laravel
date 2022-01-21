@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.header')
 
 @section('content')
 <main class="sm:container sm:mx-auto sm:max-w-lg sm:mt-10">
@@ -6,8 +6,8 @@
         <div class="w-full">
             <section class="flex flex-col break-words bg-white sm:border-1 sm:rounded-md sm:shadow-sm sm:shadow-lg">
 
-                <header class="font-semibold bg-gray-200 text-gray-700 py-5 px-6 sm:py-6 sm:px-8 sm:rounded-t-md">
-                    {{ __('Register') }}
+                <header class="text-4xl text-center font-semibold bg-gray-200 text-gray-700 py-5 px-6 sm:py-6 sm:px-8 sm:rounded-t-md">
+                    {{ __('Sign up') }}
                 </header>
 
                 <form class="w-full px-6 space-y-6 sm:px-10 sm:space-y-8" method="POST"
@@ -15,7 +15,7 @@
                     @csrf
 
                     <div class="flex flex-wrap">
-                        <label for="name" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
+                        <label for="name" class="block text-gray-700 text-xl font-bold mb-2 sm:mb-4">
                             {{ __('Name') }}:
                         </label>
 
@@ -28,9 +28,23 @@
                         </p>
                         @enderror
                     </div>
+                    <div class="flex flex-wrap">
+                        <label for="phone" class="block text-gray-700 text-xl font-bold mb-2 sm:mb-4">
+                            {{ __('Mobile Number') }}:
+                        </label>
+
+                        <input id="phone" type="text" class="form-input w-full @error('phone')  border-red-500 @enderror"
+                            name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+
+                        @error('phone')
+                        <p class="text-red-500 text-xs italic mt-4">
+                            {{ $message }}
+                        </p>
+                        @enderror
+                    </div>
 
                     <div class="flex flex-wrap">
-                        <label for="email" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
+                        <label for="email" class="block text-gray-700 text-xl font-bold mb-2 sm:mb-4">
                             {{ __('E-Mail Address') }}:
                         </label>
 
@@ -46,7 +60,7 @@
                     </div>
 
                     <div class="flex flex-wrap">
-                        <label for="password" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
+                        <label for="password" class="block text-gray-700 text-xl font-bold mb-2 sm:mb-4">
                             {{ __('Password') }}:
                         </label>
 
@@ -62,7 +76,7 @@
                     </div>
 
                     <div class="flex flex-wrap">
-                        <label for="password-confirm" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
+                        <label for="password-confirm" class="block text-gray-700 text-xl font-bold mb-2 sm:mb-4">
                             {{ __('Confirm Password') }}:
                         </label>
 
@@ -72,11 +86,11 @@
 
                     <div class="flex flex-wrap">
                         <button type="submit"
-                            class="w-full select-none font-bold whitespace-no-wrap p-3 rounded-lg text-base leading-normal no-underline text-gray-100 bg-blue-500 hover:bg-blue-700 sm:py-4">
-                            {{ __('Register') }}
+                            class="w-full select-none font-bold whitespace-no-wrap p-3 rounded-lg text-xl leading-normal no-underline text-gray-100 bg-blue-500 hover:bg-blue-700 sm:py-4">
+                            {{ __('Sign up') }}
                         </button>
 
-                        <p class="w-full text-xs text-center text-gray-700 my-6 sm:text-sm sm:my-8">
+                        <p class="w-full text-xl text-center text-gray-700 my-6 sm:text-xl sm:my-8">
                             {{ __('Already have an account?') }}
                             <a class="text-blue-500 hover:text-blue-700 no-underline hover:underline" href="{{ route('login') }}">
                                 {{ __('Login') }}

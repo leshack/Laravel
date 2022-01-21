@@ -1,93 +1,58 @@
-<footer class="bg-gray-800 py-20 mt-20">
-    <div class="sm:grid grid-cols-3 w-4/5 pb-10 m-auto border-b-2 border-gray-700">
-        <div>
-            <h3 class="text-l sm:font-bold text-gray-100">
-                Pages
-            </h3>
+  <div class="footer-top">
+    <div class="container">
+      <div class="row">
 
-            <ul class="py-4 sm:text-s pt-4 text-gray-400">
-                <li class="pb-1">
-                    <a href="/">
-                        Home
-                    </a>
-                </li>
-                <li class="pb-1">
-                    <a href="/blog">
-                        Blog
-                    </a>
-                </li>
-                <li class="pb-1">
-                    <a href="/login">
-                        Login
-                    </a>
-                </li>
-                <li class="pb-1">
-                    <a href="/register">
-                        Register
-                    </a>
-                </li>
-            </ul>
+        <div class="col-md-6">
+          <h6>About Us</h6>
+          <ul>
+
+
+          <li><a href="page.blade.php?type=aboutus">About Us</a></li>
+            <li><a href="page.php?type=faqs">FAQs</a></li>
+            <li><a href="page.php?type=privacy">Privacy</a></li>
+          <li><a href="page.php?type=terms">Terms of use</a></li>
+               <li><a href="admin/">Admin Login</a></li>
+          </ul>
         </div>
 
-        <div>
-            <h3 class="text-l sm:font-bold text-gray-100">
-                Find Us
-            </h3>
-
-            <ul class="py-4 sm:text-s pt-4 text-gray-400">
-                <li class="pb-1">
-                    <a href="/">
-                        What we do
-                    </a>
-                </li>
-                <li class="pb-1">
-                    <a href="/">
-                        Address
-                    </a>
-                </li>
-                <li class="pb-1">
-                    <a href="/">
-                        Phone
-                    </a>
-                </li>
-                <li class="pb-1">
-                    <a href="/">
-                        Contact
-                    </a>
-                </li>
-            </ul>
+        <div class="col-md-3 col-sm-6">
+          <h6>Subscribe Newsletter</h6>
+          <div class="newsletter-form">
+            <form action="/newsletter" method="post" >
+              <div class="form-group">
+                  @csrf
+                <input type="email" name="subscriberemail" class="form-control newsletter-input" required placeholder="Enter Email Address" />
+                @error('email')
+                 <span class="text-xs text-red-500">{{$message}}</span>
+                @enderror
+              </div>
+              <button type="submit" name="emailsubscibe" class="btn btn-block">Subscribe <span class="angle_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></span></button>
+            </form>
+            <p class="subscribed-text">*We send great deals and latest auto news to our subscribed users every week.</p>
+          </div>
         </div>
-
-        <div>
-            <h3 class="text-l sm:font-bold text-gray-100">
-                Latest posts
-            </h3>
-
-            <ul class="py-4 sm:text-s pt-4 text-gray-400">
-                <li class="pb-1">
-                    <a href="/">
-                        Why we love tech
-                    </a>
-                </li>
-                <li class="pb-1">
-                    <a href="/">
-                        Why we love design
-                    </a>
-                </li>
-                <li class="pb-1">
-                    <a href="/">
-                        Why to use Laravel
-                    </a>
-                </li>
-                <li class="pb-1">
-                    <a href="/">
-                        Why PHP is the best
-                    </a>
-                </li>
-            </ul>
-        </div>
+      </div>
     </div>
-    <p class="w-25 w-4/5 pb-3 m-auto text-xs text-gray-100 pt-6">
-        Copyright 2017-2021 Code With Dary. All Rights Reserved
-    </p>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-push-6 text-right">
+          <div class="footer_widget">
+            <p>Connect with Us:</p>
+            <ul>
+              <li><a href="https://code-projects.org/"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
+              <li><a href="https://code-projects.org/"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
+              <li><a href="https://code-projects.org/"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
+              <li><a href="https://code-projects.org/"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a></li>
+              <li><a href="https://code-projects.org/"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6 col-md-pull-6">
+          <p class="copy-right">Copyright &copy; 2021 Car. Brought To You By <a href="https://code-projects.org/">Lesley-Projects</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
 </footer>

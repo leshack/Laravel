@@ -1,100 +1,153 @@
-@extends('layouts.app')
+@extends('layouts.header')
 
+@include('includes.colorswitcher')
 @section('content')
-    <div class="background-image grid grid-cols-1 m-auto">
-        <div class="flex text-gray-100 pt-10">
-            <div class="m-auto pt-4 pb-16 sm:m-auto w-4/5 block text-center">
-                <h1 class="sm:text-white text-5xl uppercase font-bold text-shadow-md pb-14">
-                    Do you want to become a developer?
-                </h1>
-                <a 
-                    href="/blog"
-                    class="text-center bg-gray-50 text-gray-700 py-2 px-4 font-bold text-xl uppercase">
-                    Read More
-                </a>
+    <!-- Banners-background image-->
+<section id="banner">
+    <div class="background-image ">
+    <div class="div_zindex">
+      <div class="row">
+        <div class="col-md-5 col-md-push-7">
+          <div class="banner_content">
+            <h1>Find the right car for you.</h1>
+            <p>We have more than a thousand cars for you to choose. </p>
+            <a href="/blog" class="btn">Read More <span class="angle_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></span></a> </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+    <!-- Banners -->
+
+    <!-- Continue -->
+<section class="section-padding gray-bg">
+    <div class="container">
+    <div class="section-header text-center">
+      <h2>Find the Best Automobile Hoonicorn <span>CarForYou</span></h2>
+      <p>Avanti savoia and his team have been serving KE Kenya and surrounding areas for over 5 years. We are a member of of the outsanding group and have an "A" rating. We know your time is very valuable and we will work hard to ensure your experience with us is like none other</p>
+    </div>
+<div class="row"> 
+    <!-- Continue -->
+
+     <!-- Nav tab for new car -->
+     <div class="recent-tab">
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#resentnewcar" role="tab" data-toggle="tab">New Car</a></li>
+        </ul>
+      </div>
+      <!-- Recently Listed New Cars -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="resentnewcar">
+        
+
+                        <!-- Database query from tblvehicle using foreach-->
+      
+       @foreach($tblvehicles as $tblvehicle)
+        <div class="col-list-3">
+        <div class="recent-car-list">
+        <div class="car-info-box"> <a href="vehical-details.php?vhid=<?php echo htmlentities($tblvehicle->id);?>"><img src="{{url('images/Adminimages/vehicleimages/'.$tblvehicle->Vimage1)}}" class="img-responsive" alt="image"></a>
+        <ul>
+        <li><i class="fa fa-car" aria-hidden="true"></i><?php echo htmlentities($tblvehicle->FuelType);?></li>
+        <li><i class="fa fa-calendar" aria-hidden="true"></i><?php echo htmlentities($tblvehicle->ModelYear);?> Model</li>
+        <li><i class="fa fa-user" aria-hidden="true"></i><?php echo htmlentities($tblvehicle->SeatingCapacity);?> seats</li>
+        </ul>
+        </div>
+        <div class="car-title-m">     
+        <h6> @foreach($tblvehicle->brands as $brand) <a href="vehical-details.php?vhid=<?php echo htmlentities($brand->id);?>"><?php echo htmlentities($brand->BrandName);?>  @endforeach ,<?php echo htmlentities($tblvehicle->VehiclesTitle);?></a></h6>
+        <span class="price">$<?php echo htmlentities($tblvehicle->PricePerDay);?> /Day</span> 
+        </div>
+        <div class="inventory_info_m">
+        <p><?php echo substr($tblvehicle->VehiclesOverview,0,70);?></p>
+        </div>
+        </div>
+        </div>  
+                               <!-- Database query from tblvehicle endforeach-->                              
+       @endforeach    
+      </div>
+    </div>
+  </div>
+</section>
+     <!-- Recently Listed New Cars -->
+    
+
+     <!-- Fun Facts-->
+<section class="fun-facts-section">
+  <div class="container div_zindex">
+    <div class="row">
+      <div class="col-lg-3 col-xs-6 col-sm-3">
+        <div class="fun-facts-m">
+          <div class="cell">
+            <h2><i class="fa fa-calendar" aria-hidden="true"></i>40+</h2>
+            <p>Years In Business</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-xs-6 col-sm-3">
+        <div class="fun-facts-m">
+          <div class="cell">
+            <h2><i class="fa fa-car" aria-hidden="true"></i>1200+</h2>
+            <p>New Cars For Sale</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-xs-6 col-sm-3">
+        <div class="fun-facts-m">
+          <div class="cell">
+            <h2><i class="fa fa-car" aria-hidden="true"></i>1000+</h2>
+            <p>Used Cars For Sale</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-xs-6 col-sm-3">
+        <div class="fun-facts-m">
+          <div class="cell">
+            <h2><i class="fa fa-user-circle-o" aria-hidden="true"></i>600+</h2>
+            <p>Satisfied Customers</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Dark Overlay-->
+  <div class="dark-overlay"></div>
+</section>
+<!-- /Fun Facts--> 
+
+
+<!--Testimonial -->
+                    <!-- Database query from tbltestimonial using foreach-->
+<section class="section-padding testimonial-section parallex-bg">
+  <div class="container div_zindex">
+    <div class="section-header white-text text-center">
+      <h2>Our Satisfied <span>Customers</span></h2>
+    </div>
+    <div class="row">
+      <div id="testimonial-slider">
+
+
+
+      @foreach($tbltestimonial as $tbltestimony)
+        <div class="testimonial-m">
+          <div class="testimonial-img"> <img src="{{url('images/cat-profile.png')}}" alt="" /> </div>
+            <div class="testimonial-content">
+              <div class="testimonial-heading">
+             <h5><?php echo htmlentities($tbltestimony->name);?></h5>
+             <p><?php echo htmlentities($tbltestimony->Testimonial);?></p>
             </div>
+          </div>
         </div>
+                <!-- Database query from tblvehicle endforeach-->       
+      @endforeach
+      </div>
     </div>
-
-    <div class="sm:grid grid-cols-2 gap-20 w-4/5 mx-auto py-15 border-b border-gray-200">
-        <div>
-            <img src="https://cdn.pixabay.com/photo/2014/05/03/01/03/laptop-336704_960_720.jpg" width="700" alt="">
-        </div>
-
-        <div class="m-auto sm:m-auto text-left w-4/5 block">
-            <h2 class="text-3xl font-extrabold text-gray-600">
-                Struggling to be a better web developer?
-            </h2>
-            
-            <p class="py-8 text-gray-500 text-s">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus.
-            </p>
-
-            <p class="font-extrabold text-gray-600 text-s pb-9">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sapiente magnam vero nostrum! Perferendis eos molestias porro vero. Vel alias.
-            </p>
-
-            <a 
-                href="/blog"
-                class="uppercase bg-blue-500 text-gray-100 text-s font-extrabold py-3 px-8 rounded-3xl">
-                Find Out More
-            </a>
-        </div>
-    </div>
-
-    <div class="text-center p-15 bg-black text-white">
-        <h2 class="text-2xl pb-5 text-l"> 
-            I'm an expert in...
-        </h2>
-
-        <span class="font-extrabold block text-4xl py-1">
-            Ux Design
-        </span>
-        <span class="font-extrabold block text-4xl py-1">
-            Project Management
-        </span>
-        <span class="font-extrabold block text-4xl py-1">
-            Digital Strategy
-        </span>
-        <span class="font-extrabold block text-4xl py-1">
-            Backend Development
-        </span>
-    </div>
-
-    <div class="text-center py-15">
-        <span class="uppercase text-s text-gray-400">
-            Blog
-        </span>
-
-        <h2 class="text-4xl font-bold py-10">
-            Recent Posts
-        </h2>
-
-        <p class="m-auto w-4/5 text-gray-500">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque exercitationem saepe enim veritatis, eos temporibus quaerat facere consectetur qui.
-        </p>
-    </div>
-
-    <div class="sm:grid grid-cols-2 w-4/5 m-auto">
-        <div class="flex bg-yellow-700 text-gray-100 pt-10">
-            <div class="m-auto pt-4 pb-16 sm:m-auto w-4/5 block">
-                <span class="uppercase text-xs">
-                    PHP
-                </span>
-
-                <h3 class="text-xl font-bold py-10">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas necessitatibus dolorum error culpa laboriosam. Enim voluptas earum repudiandae consequuntur ad? Expedita labore aspernatur facilis quasi ex? Nemo hic placeat et?
-                </h3>
-
-                <a 
-                    href=""
-                    class="uppercase bg-transparent border-2 border-gray-100 text-gray-100 text-xs font-extrabold py-3 px-5 rounded-3xl">
-                    Find Out More
-                </a>
-            </div>
-        </div>
-        <div>
-            <img src="https://cdn.pixabay.com/photo/2014/05/03/01/03/laptop-336704_960_720.jpg" alt="">
-        </div>
-    </div>
+  </div>
+  
+  <!-- Dark Overlay-->
+  <div class="dark-overlay"></div>
+</section>
+    <!-- /Testimonial--> 
+<!--Back to top-->
+<div id="back-top" class="back-top"> <a href="#top"><i class="fa fa-angle-up" aria-hidden="true"></i> </a> </div>
+<!--/Back to top--> 
+    
 @endsection

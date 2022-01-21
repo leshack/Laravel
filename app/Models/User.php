@@ -20,6 +20,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'google_id',
+        'phone',
+        'picture',
     ];
 
     /**
@@ -44,5 +47,24 @@ class User extends Authenticatable
     public function post()
     {
         return $this->hasMany(Post::class);
+    }
+    public function testimonial()
+    {
+        return $this->hasMany(Testimonial::class);
+    }
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+    public function password()
+    {
+        return $this->hasOne(Password::class);
+    }
+    public function getPictureAttribute($value){
+        if($value){
+            return asset('users/images/'.$value);
+        }else{
+            return asset('users/images/no-image.png');
+        }
     }
 }

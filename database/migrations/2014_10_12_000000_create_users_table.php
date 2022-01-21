@@ -19,8 +19,15 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('Dob')->nullable();
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('country')->nullable();
+            $table->timestamp('RegDate')->nullable()->useCurrent();
+            $table->timestamp('UpdationDate')->nullable();
             $table->rememberToken();
             $table->timestamps();
+           
         });
     }
 
@@ -34,3 +41,20 @@ class CreateUsersTable extends Migration
         Schema::dropIfExists('users');
     }
 }
+
+/*
+  $table->id();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->char('ContactNo')->nullable();
+            $table->string('date of birth')->nullable();
+            $table->string('Address')->nullable();
+            $table->string('City')->nullable();
+            $table->string('Country')->nullable();
+            $table->timestamp('RegDate')->nullable();
+            $table->timestamp('UpdationDate')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
+            $table->timestamp('UpdationDate')->nullable();
+            */
