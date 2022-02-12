@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.header')
 
 @section('content')
 <div class="w-4/5 m-auto text-left">
@@ -19,4 +19,4 @@
     </p>
 </div>
 
-@endsection 
+@endsection

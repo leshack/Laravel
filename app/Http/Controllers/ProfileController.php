@@ -11,6 +11,9 @@ use App\Models\Bookings;
 use App\Models\Testimonial;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Validator\validateEmail;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -39,17 +42,17 @@ class ProfileController extends Controller
         return view('User.testimonial.mytestimonial',compact('tbltestimonial'))
                 ->with('tbltestimonial', $tbltestimonial);
     }
-    
+
     public function bookings(){
         $tblvehicles = Vehicle::with(['brands.vehicle','bookings.vehicle'])->get();
         $tblbookings = Bookings::with(['user.bookings'])->get();
         return view('User.bookings.bookings',compact('tblvehicles','tblbookings'))
             ->with('tblvehicles', $tblvehicles)
             ->with('tblbookings', $tblbookings);
-       
+
     }
-    
-    
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -67,7 +70,7 @@ class ProfileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storetestimonial(Request $request)
     {
         //
     }
@@ -101,24 +104,24 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateInfo(Request $request, $id)
+    public function updateInfo(Request $request)
     {
         $validator = Validator::make($request->all(),[
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'.Auth::user()->id],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'phone'  => ['required', 'char', 'max:10', 'unique:user'],
-            'Dob'    => ['required', 'string', 'max:100', 'unique:user'],
+            'email'=> 'required|email|unique:users,email,'.Auth::user()->id,
+           // 'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'phone'  => ['required', 'numeric', 'min:11', 'unique:users'],
+            'Dob'    => ['required', 'string', 'max:100', 'unique:users'],
             'address' => ['required', 'string'],
             'city'  => ['required', 'string', 'max:100'],
             'country' => ['required', 'string', 'max:105'],
-            'RegDate' => ['required', 'timestamp', ],
-            'UpdationDate' => ['required'],
+            'RegDate' => ['required', 'timestamp'],
+            'UpdationDate' => ['required','timestamp'],
 
         ]);
-        
-        if(!$validator->passes()){
-            return response()->json(['status'=>0,'error'=>$validator->errors()->toArray()]);
+
+        if(!$validator->fails()){
+            return back()->with(['errors'=>$validator->errors()->toArray()]);
         }else{
              $query = User::find(Auth::user()->id)->update([
                 'name'=>$request->name,
@@ -129,14 +132,102 @@ class ProfileController extends Controller
                 'city'=>$request->city,
                 'country'=>$request->country,
                 'RegDate'=>$request->RegDate,
+                'UpdationDate'=>$request->UpdationDate,
             ]);
             if(!$query){
-                return response()->json(['status'=>0,'msg'=>'Something went wrong.']);
+                return back()->with('errors', 'Something went Wrong"');
             }else{
-                return response()->json(['status'=>1,'msg'=>'Your profile info has been update successfuly.']);
+                return back()->with('success', 'Your Profile info has Updated Successfully"');
             }
        }
-                
+
+    }
+    function updatePicture(Request $request){
+        $path = 'images/usersprofilepic/';
+      //$file = $request->hasFile('user_image');
+        $new_name = 'UIMG_'.date('Ymd').uniqid().'.jpg';
+
+
+        //Upload new image
+      //$upload = $file->move(public_path($path), $new_name);
+      $upload =  $request->user_image->move(public_path($path), $new_name);
+
+        if( !$upload ){
+            return response()->json(['status'=>0,'msg'=>'Something went wrong, upload new picture failed.']);
+        }else{
+            //Get Old picture
+            $oldPicture = User::find(Auth::user()->id)->getAttributes()['picture'];
+
+            if( $oldPicture != '' ){
+                if( File::exists(public_path($path.$oldPicture))){
+                    File::delete(public_path($path.$oldPicture));
+                }
+            }
+
+            //Update DB
+            $update = User::find(Auth::user()->id)->update(['picture'=>$new_name]);
+
+            if( !$upload ){
+                return response()->json(['status'=>0,'msg'=>'Something went wrong, updating picture in db failed.']);
+            }else{
+                return response()->json(['status'=>1,'msg'=>'Your profile picture has been updated successfully']);
+            }
+
+        }
+
+    }
+   function changepassword(Request $request){
+         //Validate form
+         $validator = Validator::make($request->all(),[
+            'currentpassword'=>['required', function($attribute, $value, $fail){
+                             if(!(Hash::check($value, Auth::user()->password)) ){
+                                     return $fail(__('The current password is incorrect'));
+                                         }
+                },
+                'min:8',
+                'max:30'
+             ],
+             'newpassword'=>'required|min:8|max:30',
+             'confirmpassword'=>'required|same:newpassword'
+            ],[
+                'currentpassword.required'=>'Enter your current password',
+                'currentpassword.min'=>'Old password must have atleast 8 characters',
+                'currentpassword.max'=>'Old password must not be greater than 30 characters',
+                'newpassword.required'=>'Enter new password',
+                'newpassword.min'=>'New password must have atleast 8 characters',
+                'newpassword.max'=>'New password must not be greater than 30 characters',
+                'confirmnewpassword.required'=>'ReEnter your new password',
+                'confirmnewpassword.same'=>'New password and Confirm new password must match'
+        ]);
+        if($validator->fails()){
+            return response()->json(['status'=>0,'error'=>$validator->errors()->toArray()]);
+        }else{
+
+         $update = User::find(Auth::user()->id)->update(['password'=>Hash::make($request->newpassword)]);
+
+         if( !$update ){
+            return response()->json(['status'=>0,'msg'=>'Something went wrong, Failed to update password in db']);
+         }else{
+            return response()->json(['status'=>1,'msg'=>'Your password has been changed successfully']);
+         }
+        }
+
+    }
+
+    public function  testimony(Request $request) {
+        $this->validate($request, [
+            'email'=> 'email|unique:users,email,'.Auth::user()->id,
+            'Testimonial'=>'required', 'string', 'max:200',
+            'user_id' => 'string','numeric'.Auth::user()->id
+        ]);
+        $testimonial = new Testimonial;
+        $testimonial->email =$request->email.Auth::user()->email;
+        $testimonial->Testimonial = $request->Testimonial;
+        $testimonial->user_id =$request->user_id.Auth::user()->id;
+
+        $testimonial->save();
+
+        return back()->with('success', 'Testimonail submitted successfully');
     }
 
     /**

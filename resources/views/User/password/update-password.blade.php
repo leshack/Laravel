@@ -1,7 +1,9 @@
 @extends('layouts.header')
 
-@include('includes.colorswitcher')
+
 @section('content')
+
+@include('includes.colorswitcher')
 @if ($errors->any())
     <div class="w-4/5 m-auto">
         <ul>
@@ -36,7 +38,7 @@
   <!-- Dark Overlay-->
   <div class="dark-overlay"></div>
 </section>
-<!-- /Page Header--> 
+<!-- /Page Header-->
 <style>
     .errorWrap {
     padding: 10px;
@@ -64,36 +66,41 @@
 
       <div class="dealer_info">
         <h5>{{Auth::user()->name}}</h5>
-        <p>{{Auth::user()->adress}}<br>
+        <p>{{Auth::user()->address}}<br>
         {{Auth::user()->city}}&nbsp;{{Auth::user()->country}}</p>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-md-7 col-sm-3"> 
-      <div class="col-md-8 col-sm-8">
+        <div class="col-md-3 col-sm-3">
+            @include('includes.siderbar')
+      <div class="col-md-6 col-sm-8">
         <div class="profile_wrap">
-        <form name="chngpwd" method="post" onSubmit="return valid();">
-        
+        <form name="chngpwd" method="post" action="{{route('user.passwordchange')}}" id="PasswordForm">
+
+            @csrf
             <div class="gray-bg field-title">
               <h6>Update password</h6>
             </div>
-             <?php if($errors->any()){?><div class="errorWrap"><strong>ERROR</strong>:{{ $errors }}</div><?php } 
-        else  if (session()->get('message') ){?><div class="succWrap"><strong>SUCCESS</strong>:{{ session()->get('message') }} </div><?php }?> 
+             <?php if($errors->any()){?><div class="errorWrap"><strong>ERROR</strong>:{{ $errors }}</div><?php }
+        else  if (session()->get('success') ){?><div class="succWrap"><strong>SUCCESS</strong>:{{ session()->get('success') }} </div><?php }?>
             <div class="form-group">
               <label class="control-label">Current Password</label>
-              <input class="form-control white_bg" id="password" name="password"  type="password" required>
+              <input class="form-control white_bg" id="password" name="currentpassword"  type="text" required>
+              <span class="text-danger error-text currentpassword_error"></span>
             </div>
             <div cl
             <div class="form-group">
               <label class="control-label">Password</label>
-              <input class="form-control white_bg" id="newpassword" type="password" name="newpassword" required>
+              <input class="form-control white_bg" id="newpassword" type="text" name="newpassword" required>
+              <span class="text-danger error-text newpassword_error"></span>
             </div>
             <div class="form-group">
               <label class="control-label">Confirm Password</label>
-              <input class="form-control white_bg" id="confirmpassword" type="password" name="confirmpassword"  required>
+              <input class="form-control white_bg" id="confirmpassword" type="text" name="confirmpassword" required >
+              <span class="text-danger error-text confirmpassword_error"></span>
             </div>
-          
+
             <div class="form-group">
                <input type="submit" value="Update" name="update" id="submit" class="btn btn-block">
             </div>
@@ -103,10 +110,56 @@
     </div>
   </div>
 </section>
-<!--/Profile-setting--> 
-@endsection
+<!--/Profile-setting-->
 
 
 <!--Back to top-->
-<div id="back-top" class="back-top"> <a href="#top"><i class="fa fa-angle-up" aria-hidden="true"></i> </a> </div>
-<!--/Back to top--> 
+<div id="back-top" class="back-top"> <a href="#top"><i class="fa fa-angle-up" aria-hidden="true"></i></a></div>
+<!--/Back to top-->
+
+{{-- CUSTOM JS CODES --}}
+<script>
+
+    $.ajaxSetup({
+       headers:{
+         'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+       }
+    });
+
+    $(function(){
+
+      /* UPDATE USER PERSONAL INFO */
+      $('#PasswordForm').on('submit',function(e){
+         e.preventDefault();
+
+         $.ajax({
+            url:$(this).attr('action'),
+            method:$(this).attr('method'),
+            data:new FormData(this),
+            processData:false,
+            dataType:'json',
+            contentType:false,
+            beforeSend:function(){
+              $(document).find('span.error-text').text('');
+            },
+            success:function(data){
+              if(data.status == 0){
+                $.each(data.error, function(prefix, val){
+                  $('span.'+prefix+'_error').text(val[0]);
+                });
+              }else{
+                $('#PasswordForm')[0].reset();
+                alert(data.msg);
+              }
+            }
+         });
+      });
+
+
+    });
+
+  </script>
+
+@endsection
+
+

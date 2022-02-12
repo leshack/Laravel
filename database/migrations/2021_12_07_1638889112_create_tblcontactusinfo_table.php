@@ -11,7 +11,7 @@ class CreateTblcontactusinfoTable extends Migration
         Schema::create('tblcontactusinfo', function (Blueprint $table) {
 
 		$table->integer('id')->autoIncrement();
-		;
+		$table->tinyText('Address')->nullable();
 		$table->string('EmailId')->nullable();
 		$table->char('ContactNo')->nullable();
 

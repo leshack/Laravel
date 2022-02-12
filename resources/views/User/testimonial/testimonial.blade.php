@@ -1,7 +1,9 @@
 @extends('layouts.header')
 
-@include('includes.colorswitcher')
+
 @section('content')
+
+@include('includes.colorswitcher')
 <!--Page Header-->
 <section class="page-header profile_page">
   <div class="container">
@@ -18,7 +20,7 @@
   <!-- Dark Overlay-->
   <div class="dark-overlay"></div>
 </section>
-<!-- /Page Header--> 
+<!-- /Page Header-->
 <section class="user_profile inner_pages">
   <div class="container">
     <div class="user_profile_info gray-bg padding_4x4_40">
@@ -27,27 +29,28 @@
 
       <div class="dealer_info">
         <h5>{{Auth::user()->name}}</h5>
-        <p>{{Auth::user()->adress}}<br>
+        <p>{{Auth::user()->address}}<br>
         {{Auth::user()->city}}&nbsp;{{Auth::user()->country}}</p>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-md-7 col-sm-3">
-      <div class="col-md-8 col-sm-8">
+        <div class="col-md-3 col-sm-3">
+            @include('includes.siderbar')
+      <div class="col-md-6 col-sm-8">
         <div class="profile_wrap">
           <h5 class="uppercase underline">Post a Testimonial</h5>
-          <?php if($errors->any()){?><div class="errorWrap"><strong>ERROR</strong>:{{ $errors }}</div><?php } 
-        else  if (session()->get('message') ){?><div class="succWrap"><strong>SUCCESS</strong>:{{ session()->get('message') }} </div><?php }?> 
-          <form  method="post">
-          
-          
+          <?php if($errors->any()){?><div class="errorWrap"><strong>ERROR</strong>:{{ $errors }}</div><?php }
+        else  if (session()->get('success') ){?><div class="succWrap"><strong>SUCCESS</strong>:{{ session()->get('success') }} </div><?php }?>
+          <form  method="post" action="{{route('user.testimonial') }}">
+          @csrf
+
             <div class="form-group">
-              <label class="control-label">Testimonail</label>
-              <textarea class="form-control white_bg" name="testimonial" rows="4" required=""></textarea>
+              <label class="control-label">Testimonial</label>
+              <textarea class="form-control white_bg" name="Testimonial" rows="4" required=""></textarea>
             </div>
-          
-           
+
+
             <div class="form-group">
               <button type="submit" name="submit" class="btn">Save  <span class="angle_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></span></button>
             </div>
@@ -55,7 +58,8 @@
         </div>
       </div>
     </div>
+    </div>
   </div>
 </section>
-<!--/Profile-setting--> 
+<!--/Profile-setting-->
 @endsection

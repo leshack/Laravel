@@ -11,16 +11,16 @@ class Vehicle extends Model
 
     protected $table = 'tblvehicles';
     protected $primaryKey ='id';
-   
-    
+
+
     public function brands()
     {
         return $this->hasMany(Brands::class);
     }
     public function bookings()
     {
-        return $this->hasOne(Bookings::class);
+        return $this->hasMany(Bookings::class);
     }
-    
-    
+
+
 }

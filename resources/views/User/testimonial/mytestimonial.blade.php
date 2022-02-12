@@ -1,7 +1,8 @@
 @extends('layouts.header')
 
-@include('includes.colorswitcher')
 @section('content')
+
+@include('includes.colorswitcher')
 <!--Page Header-->
 <section class="page-header profile_page">
   <div class="container">
@@ -18,7 +19,7 @@
   <!-- Dark Overlay-->
   <div class="dark-overlay"></div>
 </section>
-<!-- /Page Header--> 
+<!-- /Page Header-->
 
 <section class="user_profile inner_pages">
   <div class="container">
@@ -28,12 +29,13 @@
 
       <div class="dealer_info">
         <h5>{{Auth::user()->name}}</h5>
-        <p>{{Auth::user()->adress}}<br>
+        <p>{{Auth::user()->address}}<br>
         {{Auth::user()->city}}&nbsp;{{Auth::user()->country}}</p>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-7 col-sm-7">
+        <div class="col-md-3 col-sm-3">
+            @include('includes.siderbar')
       <div class="col-md-8 col-sm-8">
       <div class="profile_wrap">
           <h5 class="uppercase underline">My Testimonials </h5>
@@ -44,7 +46,7 @@
                 @foreach($tbltestimonial as $tbltestimony)
                 <p><?php echo htmlentities($tbltestimony->Testimonial);?> </p>
                 <p><b>Posting Date:</b><?php echo htmlentities($tbltestimony->PostingDate);?> </p>
-            
+
                 <?php if($tbltestimony->status==1){ ?>
                         <div class="vehicle_status"> <a class="btn outline btn-xs active-btn">Active</a>
                         <div class="clearfix"></div>
@@ -53,10 +55,10 @@
                         <div class="vehicle_status"> <a href="#" class="btn outline btn-xs">Waiting for approval</a>
                         <div class="clearfix"></div>
                         </div>
-                <?php } ?>      
+                <?php } ?>
                 @endforeach
-            </div> 
-         </li> 
+            </div>
+         </li>
        </ul>
      </div>
    </div>
@@ -64,5 +66,5 @@
 </div>
 </div>
 </section>
-<!--/my-vehicles--> 
+<!--/my-vehicles-->
 @endsection

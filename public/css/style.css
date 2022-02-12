@@ -500,6 +500,51 @@ blockquote,
 .margin-none {
 	margin:0px;
 }
+.card {
+    position: relative;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.20rem;
+  }
+.card {
+    box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
+    margin-bottom: 1rem;
+}
+.card-primary.card-outline {
+    border-top: 3px solid #007bff;
+}
+.profile-user-img {
+    border: 3px solid #adb5bd;
+    margin: 0 auto;
+    padding: 3px;
+    width: auto;
+    border-radius: 50%;
+
+}
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+.text-center {
+    text-align: center!important;
+}
+.container-fluid, .container-lg, .container-md, .container-sm, .container-xl {
+    width: 100%;
+    padding-right: 7.5px;
+    padding-left: 7.5px;
+    margin-right: auto;
+    margin-left: auto;
+}
 
 
 
@@ -3672,9 +3717,11 @@ table.info-tabel tr td {
 	max-width:100%;
 }
 .dealer_info {
-	float:right;
-	width:66%;
+
+	width:108%;
 	padding:10px 0;
+    text-align: center;
+
 }
 .profile_wrap {
   padding: 16px 5px;
@@ -5454,7 +5501,5 @@ h5 {
 .testimonial_wrap {
   padding: 40px 20px;
 }
-
-
 
 }

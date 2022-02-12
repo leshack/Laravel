@@ -1,7 +1,8 @@
 @extends('layouts.header')
 
-@include('includes.colorswitcher')
+
 @section('content')
+@include('includes.colorswitcher')
     <!-- Banners-background image-->
 <section id="banner">
     <div class="background-image ">
@@ -26,7 +27,7 @@
       <h2>Find the Best Automobile Hoonicorn <span>CarForYou</span></h2>
       <p>Avanti savoia and his team have been serving KE Kenya and surrounding areas for over 5 years. We are a member of of the outsanding group and have an "A" rating. We know your time is very valuable and we will work hard to ensure your experience with us is like none other</p>
     </div>
-<div class="row"> 
+<div class="row">
     <!-- Continue -->
 
      <!-- Nav tab for new car -->
@@ -38,37 +39,37 @@
       <!-- Recently Listed New Cars -->
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="resentnewcar">
-        
 
-                        <!-- Database query from tblvehicle using foreach-->
-      
+
+                        <!-- Database query from tblvehicle and tblbrands using foreach-->
+
        @foreach($tblvehicles as $tblvehicle)
         <div class="col-list-3">
         <div class="recent-car-list">
-        <div class="car-info-box"> <a href="vehical-details.php?vhid=<?php echo htmlentities($tblvehicle->id);?>"><img src="{{url('images/Adminimages/vehicleimages/'.$tblvehicle->Vimage1)}}" class="img-responsive" alt="image"></a>
+        <div class="car-info-box"> <a href="{{ route('vehicle-details')}}?vhid=<?php echo htmlentities($tblvehicle->id);?>"><img src="{{url('images/Adminimages/vehicleimages/'.$tblvehicle->Vimage1)}}" class="img-responsive" alt="image"></a>
         <ul>
         <li><i class="fa fa-car" aria-hidden="true"></i><?php echo htmlentities($tblvehicle->FuelType);?></li>
         <li><i class="fa fa-calendar" aria-hidden="true"></i><?php echo htmlentities($tblvehicle->ModelYear);?> Model</li>
         <li><i class="fa fa-user" aria-hidden="true"></i><?php echo htmlentities($tblvehicle->SeatingCapacity);?> seats</li>
         </ul>
         </div>
-        <div class="car-title-m">     
-        <h6> @foreach($tblvehicle->brands as $brand) <a href="vehical-details.php?vhid=<?php echo htmlentities($brand->id);?>"><?php echo htmlentities($brand->BrandName);?>  @endforeach ,<?php echo htmlentities($tblvehicle->VehiclesTitle);?></a></h6>
-        <span class="price">$<?php echo htmlentities($tblvehicle->PricePerDay);?> /Day</span> 
+        <div class="car-title-m">
+        <h6> @foreach($tblvehicle->brands as $brand) <a href="{{ route('vehicle-details')}}?vhid=<?php echo htmlentities($brand->id);?>"><?php echo htmlentities($brand->BrandName);?>  @endforeach ,<?php echo htmlentities($tblvehicle->VehiclesTitle);?></a></h6>
+        <span class="price">$<?php echo htmlentities($tblvehicle->PricePerDay);?> /Day</span>
         </div>
         <div class="inventory_info_m">
         <p><?php echo substr($tblvehicle->VehiclesOverview,0,70);?></p>
         </div>
         </div>
-        </div>  
-                               <!-- Database query from tblvehicle endforeach-->                              
-       @endforeach    
+        </div>
+                               <!-- /Database query from tblvehicle and tblbrands endforeach-->
+       @endforeach
       </div>
     </div>
   </div>
 </section>
      <!-- Recently Listed New Cars -->
-    
+
 
      <!-- Fun Facts-->
 <section class="fun-facts-section">
@@ -111,7 +112,7 @@
   <!-- Dark Overlay-->
   <div class="dark-overlay"></div>
 </section>
-<!-- /Fun Facts--> 
+<!-- /Fun Facts-->
 
 
 <!--Testimonial -->
@@ -136,18 +137,18 @@
             </div>
           </div>
         </div>
-                <!-- Database query from tblvehicle endforeach-->       
+                <!-- Database query from tbltestimonial endforeach-->
       @endforeach
       </div>
     </div>
   </div>
-  
+
   <!-- Dark Overlay-->
   <div class="dark-overlay"></div>
 </section>
-    <!-- /Testimonial--> 
+    <!-- /Testimonial-->
 <!--Back to top-->
 <div id="back-top" class="back-top"> <a href="#top"><i class="fa fa-angle-up" aria-hidden="true"></i> </a> </div>
-<!--/Back to top--> 
-    
+<!--/Back to top-->
+
 @endsection

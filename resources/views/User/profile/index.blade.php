@@ -36,7 +36,7 @@
   <!-- Dark Overlay-->
   <div class="dark-overlay"></div>
 </section>
-<!-- /Page Header--> 
+<!-- /Page Header-->
 <style>
     .errorWrap {
     padding: 10px;
@@ -59,37 +59,52 @@
 
 <section class="user_profile inner_pages">
   <div class="container">
+    <div class="row col-md-6 col-sm-8">
     <div class="user_profile_info gray-bg padding_4x4_40">
-      <div class="upload_user_logo"> <img class="profile-user-img img-fluid img-circle admin_picture" src="{{ Auth::user()->picture }}" alt="User profile picture">
+        <div class="col-md-9">
+
+            <!-- Profile Image -->
+            <div class="card card-primary card-outline ">
+              <div class="card-body box-profile">
+                <div class="text-center">
+                  <img class="profile-user-img img-fluid " src="{{Auth::user()->picture}}" alt="User profile picture">
+                </div>
+                <input type="file" name="user_image" id="user_image" style="opacity: 0;height:1px;display:none">
+           <a href="javascript:void(0)" class="btn btn-primary btn-block" id="change_picture_btn"><b>Change Picture</b></a>
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>
+
+
+        <div class="dealer_info">
+          <h5>{{Auth::user()->name}}</h5>
+          <p>{{Auth::user()->address}}<br>
+             {{Auth::user()->city}}&nbsp;{{Auth::user()->country}}</p>
+        </div>
       </div>
 
-      <div class="dealer_info">
-        <h5>{{Auth::user()->name}}</h5>
-        <p>{{Auth::user()->adress}}<br>
-        {{Auth::user()->city}}&nbsp;{{Auth::user()->country}}</p>
-      </div>
     </div>
-  
     <div class="row">
-      <div class="col-md-7 col-sm-3"> 
-      <div class="col-md-8 col-sm-8">
+
+      <div class="col-md-6 col-sm-8">
         <div class="profile_wrap">
           <h5 class="uppercase underline">Profile Settings</h5>
-          <?php  
-         if (session()->get('message') ){?><div class="succWrap"><strong>SUCCESS</strong>:{{ session()->get('message') }} </div><?php }?>
-          <form  method="post">
+          <?php if($errors->any()){?><div class="errorWrap"><strong>ERROR</strong>:{{ $errors }}</div><?php }
+          else if(session()->get('success') ){?><div class="succWrap"><strong>SUCCESS</strong>:{{ session()->get('success') }}</div><?php }?>
+          <form  method="post" action="profile" id="Profileform" enctype="multipart/form-data">
+              @csrf
            <div class="form-group">
               <label class="control-label">Reg Date -</label>
               {{Auth::user()->RegDate}}
             </div>
-             {{Auth::user()->UpdationDate}}
             <div class="form-group">
               <label class="control-label">Last Update at  -</label>
-              {{Auth::user()->UpdationDate}}
+              {{Auth::user()->updated_at}}
             </div>
             <div class="form-group">
               <label class="control-label">Full Name</label>
-              <input class="form-control white_bg" name="fullname" value="{{Auth::user()->name}}" id="fullname" type="text"  required>
+              <input class="form-control white_bg" name="name" value="{{Auth::user()->name}}" id="name" type="text"  required>
             </div>
             <div class="form-group">
               <label class="control-label">Email Address</label>
@@ -101,33 +116,71 @@
             </div>
             <div class="form-group">
               <label class="control-label">Date of Birth&nbsp;(dd/mm/yyyy)</label>
-              <input class="form-control white_bg" value="{{Auth::user()->Dob}}" name="dob" placeholder="dd/mm/yyyy" id="birth-date" type="text" >
+              <input class="form-control white_bg" value="{{Auth::user()->Dob}}" name="Dob" placeholder="dd/mm/yyyy" id="Dob" type="text" required >
             </div>
             <div class="form-group">
               <label class="control-label">Your Address</label>
-              <textarea class="form-control white_bg" name="address" rows="4" >{{Auth::user()->address}}</textarea>
+              <textarea class="form-control white_bg" name="address" rows="4"   id="address" required>{{Auth::user()->address}}</textarea>
             </div>
             <div class="form-group">
               <label class="control-label">Country</label>
-              <input class="form-control white_bg"  id="country" name="country" value="{{Auth::user()->country}}" type="text">
+              <input class="form-control white_bg"  name="country" value="{{Auth::user()->country}}" id="country" type="text" required>
             </div>
             <div class="form-group">
               <label class="control-label">City</label>
-              <input class="form-control white_bg" id="city" name="city" value="{{Auth::user()->city}}" type="text">
-            </div>           
+              <input class="form-control white_bg"  name="city" value="{{Auth::user()->city}}" id="city" type="text" required>
+            </div>
             <div class="form-group">
               <button type="submit" name="updateprofile" class="btn">Save Changes <span class="angle_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></span></button>
             </div>
           </form>
         </div>
       </div>
-    </div>
+
   </div>
 </section>
 
 <!--Back to top-->
 <div id="back-top" class="back-top"> <a href="#top"><i class="fa fa-angle-up" aria-hidden="true"></i> </a> </div>
-<!--/Back to top--> 
+<!--/Back to top-->
+
+{{-- CUSTOM JS CODES --}}
+<script>
+
+    $.ajaxSetup({
+       headers:{
+         'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+       }
+    });
+
+    $(function(){
+
+      /* UPDATE USER PERSONAL INFO */
+      $(document).on('click','#change_picture_btn', function(){
+        $('#user_image').click();
+      });
+
+
+      $('#user_image').ijaboCropTool({
+            preview : '.user_picture',
+            setRatio:1,
+            allowedExtensions: ['jpg', 'jpeg','png'],
+            buttonsText:['CROP','QUIT'],
+            buttonsColor:['#30bf7d','#ee5155', -15],
+            processUrl:'{{ route("user.profilepic") }}',
+            // withCSRF:['_token','{{ csrf_token() }}'],
+            onSuccess:function(message, element, status){
+               alert(message);
+            },
+            onError:function(message, element, status){
+              alert(message);
+            }
+         });
+
+
+    });
+
+  </script>
 
 @endsection
 

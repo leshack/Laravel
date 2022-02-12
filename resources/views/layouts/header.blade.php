@@ -18,6 +18,11 @@
     <link href="{{url('css/slick.css')}}" rel="stylesheet">
     <link href="{{url('css/bootstrap-slider.min.css')}}" rel="stylesheet">
     <link href="{{url('css/font-awesome.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{url('css/ijaboCropTool/ijaboCropTool.min.css') }}">
+    {{--
+    <link rel="stylesheet" href="{{url('dist/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ url('plugins/fontawesome-free/css/all.min.css') }}">
+    --}}
           <link rel="stylesheet" id="switcher-css" type="text/css" href="{{url('switcher/css/switcher.css')}}" media="all" />
           <link rel="alternate stylesheet" type="text/css" href="{{url('switcher/css/red.css')}}" title="red" media="all" data-default-color="true" />
           <link rel="alternate stylesheet" type="text/css" href="{{url('switcher/css/orange.css')}}" title="orange" media="all" />
@@ -30,7 +35,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{url('images/favicon-icon/apple-touch-icon-72-precomposed.png')}}">
     <link rel="apple-touch-icon-precomposed" href="{{url('images/favicon-icon/apple-touch-icon-57-precomposed.png')}}">
     <link rel="shortcut icon" href="{{url('images/favicon-icon/favicon.png')}}">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
 </head>
 <body>
 <header>
@@ -59,7 +64,7 @@
                 <li><a href="https://code-projects.org/"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
               </ul>
             </div>
-  
+
             @guest
             <div class="login_btn"> <a href="{{ route('login') }}" class="btn btn-xs uppercase" data-toggle="modal" data-dismiss="modal">{{ __('Login') }}</a> </div>
                  @if (Route::has('register'))
@@ -88,7 +93,7 @@
         <div class="user_login">
           <ul>
           @guest
-          
+
             <li class="dropdown"> <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle" aria-hidden="true"></i>
             <i class="fa fa-angle-down" aria-hidden="true"></i></a>
               <ul class="dropdown-menu">
@@ -100,7 +105,7 @@
           <li><a href="{{ route('login') }}" data-toggle="modal" data-dismiss="modal">My Testimonial</a></li>
             <li><a href="{{ route('login') }}" data-toggle="modal" data-dismiss="modal">Sign Out</a></li>
                    @endif
-             @else 
+             @else
              <li class="dropdown"> <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle" aria-hidden="true"></i>
              <span>{{ Auth::user()->name }}</span><i class="fa fa-angle-down" aria-hidden="true"></i></a>
              <ul class="dropdown-menu">
@@ -129,12 +134,12 @@
       </div>
       <div class="collapse navbar-collapse" id="navigation">
         <ul class="nav navbar-nav">
-          <li><a href="index.php">Home</a>    </li>
+          <li><a href="{{ route('home')}}">Home</a>    </li>
 
-          <li><a href="page.php?type=aboutus">About Us</a></li>
-          <li><a href="car-listing.php">Car Listing</a>
-          <li><a href="page.php?type=faqs">FAQs</a></li>
-          <li><a href="contact-us.php">Contact Us</a></li>
+
+          <li><a href="{{ route('car-listing')}}">Car Listing</a>
+          <li><a href="{{url('page')}}?type=faqs">FAQs</a></li>
+          <li><a href="{{ route('contact-us')}}">Contact Us</a></li>
 
         </ul>
       </div>
@@ -144,14 +149,15 @@
    <!-- Scripts -->
    <script src="{{asset('js/app.js')}}" defer></script>
     <script src="{{url('js/jquery.min.js')}}"></script>
-    <script src="{{url('js/bootstrap.min.js')}}"></script> 
-    <script src="{{url('js/interface.js')}}"></script> 
+    <script src="{{url('js/bootstrap.min.js')}}"></script>
+    <script src="{{url('js/interface.js')}}"></script>
+    <script src="{{url('css/ijaboCropTool/ijaboCropTool.min.js') }}"></script>
     <!--Switcher-->
     <script src="{{url('switcher/js/switcher.js')}}"></script>
-    <!--bootstrap-slider-JS--> 
-    <script src="{{url('js/bootstrap-slider.min.js')}}"></script> 
-    <!--Slider-JS--> 
-    <script src="{{url('js/slick.min.js')}}"></script> 
+    <!--bootstrap-slider-JS-->
+    <script src="{{url('js/bootstrap-slider.min.js')}}"></script>
+    <!--Slider-JS-->
+    <script src="{{url('js/slick.min.js')}}"></script>
     <script src="{{url('js/owl.carousel.min.js')}}"></script>
 </header>
     <div>

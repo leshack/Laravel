@@ -23,6 +23,11 @@ class User extends Authenticatable
         'google_id',
         'phone',
         'picture',
+        'Dob',
+        'address',
+        'city',
+        'country',
+
     ];
 
     /**
@@ -43,6 +48,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    protected $table = 'users';
+
 
     public function post()
     {
@@ -54,7 +61,7 @@ class User extends Authenticatable
     }
     public function profile()
     {
-        return $this->hasOne(Profile::class);
+        return $this->hasMany(Profile::class);
     }
     public function password()
     {
@@ -62,9 +69,9 @@ class User extends Authenticatable
     }
     public function getPictureAttribute($value){
         if($value){
-            return asset('users/images/'.$value);
+            return asset('images/usersprofilepic/'.$value);
         }else{
-            return asset('users/images/no-image.png');
+            return asset('images/usersprofilepic/no-image.png');
         }
     }
 }

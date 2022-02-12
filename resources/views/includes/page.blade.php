@@ -1,7 +1,9 @@
 @extends('layouts.header')
 
 @section('content')
-foreach($tblpages as $tblpage)
+
+@include('includes.colorswitcher')
+@foreach($tblpages as $tblpage)
 <section class="page-header aboutus_page">
   <div class="container">
     <div class="page-header_wrap">
@@ -27,7 +29,10 @@ foreach($tblpages as $tblpage)
     </div>
     </div>
 </section>
+@endforeach
 
 <!--Back to top-->
 <div id="back-top" class="back-top"> <a href="#top"><i class="fa fa-angle-up" aria-hidden="true"></i> </a> </div>
-<!--/Back to top--> 
+<!--/Back to top-->
+
+@endsection

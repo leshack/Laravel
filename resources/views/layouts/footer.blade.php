@@ -7,10 +7,10 @@
           <ul>
 
 
-          <li><a href="page.blade.php?type=aboutus">About Us</a></li>
-            <li><a href="page.php?type=faqs">FAQs</a></li>
-            <li><a href="page.php?type=privacy">Privacy</a></li>
-          <li><a href="page.php?type=terms">Terms of use</a></li>
+          <li><a href="{{url('page')}}?type=aboutus">About Us</a></li>
+            <li><a href="{{url('page')}}?type=faqs">FAQs</a></li>
+            <li><a href="{{url('page')}}?type=privacy">Privacy</a></li>
+          <li><a href="{{url('page')}}?type=terms">Terms of use</a></li>
                <li><a href="admin/">Admin Login</a></li>
           </ul>
         </div>
