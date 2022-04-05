@@ -14,6 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Car Hoonicorn'),
+    'display' => env('APP_DISPLAY_NAME', 'Hoonicorn'),
 
     /*
     |--------------------------------------------------------------------------
@@ -230,9 +231,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Newsletter' => Spatie\Newsletter\NewsletterFacade::class,
-        
-        
- 
+
+
+
 
 
     ],

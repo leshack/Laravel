@@ -5,9 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\Auth;
-
-class isUserMiddleware
+class LockAccountScreen
 {
     /**
      * Handle an incoming request.
@@ -18,10 +16,12 @@ class isUserMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if( Auth::check() && Auth::user()->role == 2){
-            return $next($request);
-        }else{
-            return redirect()->route('login');
+        if ($request->session()->has('locked') && url()->current() != route('admin.lockscreen')){
+
+            return redirect()->route('admin.lockscreen');
         }
+
+        return $next($request);
+
     }
 }

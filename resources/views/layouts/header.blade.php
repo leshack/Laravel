@@ -43,7 +43,7 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-3 col-md-2">
-          <div class="logo"> <a href="index.php"><img src="{{url('images/logg.png')}}" alt="image"/></a> </div>
+          <div class="logo"> <a href="/"><img src="{{url('images/logg.png')}}" alt="image"/></a> </div>
         </div>
         <div class="col-sm-9 col-md-10">
           <div class="header_info">
@@ -114,6 +114,8 @@
             <li><a href="{{ route('user.bookings')}}">My Booking</a></li>
             <li><a href="{{ route('user.testimonial')}}">Post a Testimonial</a></li>
           <li><a href="{{ route('user.mytestimonial')}}">My Testimonial</a></li>
+          <li><a href="{{ route('blog.create')}}">Creat Blog</a></li>
+
             <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();"><form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
                 {{ csrf_field() }}
@@ -134,10 +136,11 @@
       </div>
       <div class="collapse navbar-collapse" id="navigation">
         <ul class="nav navbar-nav">
-          <li><a href="{{ route('home')}}">Home</a>    </li>
+          <li><a href="/">Home</a>    </li>
 
 
           <li><a href="{{ route('car-listing')}}">Car Listing</a>
+            <li><a href="{{ route('blog.index')}}">Blog</a>
           <li><a href="{{url('page')}}?type=faqs">FAQs</a></li>
           <li><a href="{{ route('contact-us')}}">Contact Us</a></li>
 

@@ -239,14 +239,16 @@
           <div class="sidebar_widget">
             <div class="widget_heading">
               <h5><i class="fa fa-envelope" aria-hidden="true"></i>Book Now</h5>
+              <?php if($errors->any()){?><div class="errorWrap"><strong>ERROR</strong>:{{ $errors }}</div><?php }
+        else  if (session()->get('success') ){?><div class="succWrap"><strong>SUCCESS</strong>:{{ session()->get('success') }} </div><?php }?>
             </div>
-            <form method="post">
+            <form method="post" action="{{ route('user.bookings') }}">
                 @csrf
               <div class="form-group">
-                <input type="text" class="form-control" name="fromdate" placeholder="From Date(dd/mm/yyyy)" required>
+                <input type="date" class="form-control" name="FromDate" placeholder="From Date(dd/mm/yyyy)" required>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" name="todate" placeholder="To Date(dd/mm/yyyy)" required>
+                <input type="date" class="form-control" name="ToDate" placeholder="To Date(dd/mm/yyyy)" required>
               </div>
               <div class="form-group">
                 <textarea rows="4" class="form-control" name="message" placeholder="Message" required></textarea>

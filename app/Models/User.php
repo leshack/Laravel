@@ -19,6 +19,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'email_verified',
         'password',
         'google_id',
         'phone',
@@ -66,6 +67,9 @@ class User extends Authenticatable
     public function password()
     {
         return $this->hasOne(Password::class);
+    }
+    public function bookings(){
+        return $this->hasMany(Bookings::class);
     }
     public function getPictureAttribute($value){
         if($value){

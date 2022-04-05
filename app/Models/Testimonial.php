@@ -9,7 +9,7 @@ class Testimonial extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['email', 'Testimonial','user_id'];
+    protected $fillable = ['email', 'Testimonial'];
 
     protected $table = 'tbltestimonial';
     protected $primaryKey ='id';

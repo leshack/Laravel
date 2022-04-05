@@ -10,12 +10,12 @@ class CreateTblbrandsTable extends Migration
     {
         Schema::create('tblbrands', function (Blueprint $table) {
 
-		$table->integer('id')->autoIncrement()->onDuplicateReplace();
-        $table->unsignedBigInteger('vehicle_id')->nullable()->index('vehicle_id')->foreign()->references('id')->on('tblvehicles')->comment('The corresponding vehicle.');
+		$table->integer('id')->autoIncrement();
+        $table->unsignedBigInteger('vehicle_id')->nullable()->index('vehicle_id')->foreign()->references('id')->on('tblvehicles');
 		$table->string('BrandName');
-        $table->unsignedBigInteger('bookings_id')->nullable()->index('bookings_id')->foreign()->references('id')->on('tblbookings')->comment('The corresponding booking id.');
-		$table->timestamp('CreationDate')->nullable()->useCurrent();
-		$table->timestamp('UpdationDate')->nullable();
+        $table->unsignedBigInteger('bookings_id')->nullable()->index('bookings_id')->foreign()->references('id')->on('tblbookings');
+		$table->timestamp('created_at')->nullable()->useCurrent();
+		$table->timestamp('updated_at')->nullable();
 
 
         });

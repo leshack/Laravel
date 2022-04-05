@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
+use Laravel\Socialite\Two\AbstractProvider;
 
 class GoogleController extends Controller
 {
@@ -41,7 +42,7 @@ class GoogleController extends Controller
 
             Auth::loginUsingId($saveUser->id);
 
-            return redirect()->route('/home');
+            return redirect()->route('home');
         } catch (\Throwable $th) {
             throw $th;
         }

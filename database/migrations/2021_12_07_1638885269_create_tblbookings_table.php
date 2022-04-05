@@ -11,13 +11,15 @@ class CreateTblbookingsTable extends Migration
         Schema::create('tblbookings', function (Blueprint $table) {
 
 		$table->integer('id')->autoIncrement();
-		$table->string('userEmail')->nullable();
+		$table->string('email')->nullable();
 		$table->integer('vehicle_id')->nullable();
+        $table->unsignedBigInteger('user_id')->nullable()->index('user_id')->foreign()->references('id')->on('users');
 		$table->string('FromDate')->nullable();
 		$table->string('ToDate')->nullable();
-		$table->string('message')->nullable();
-		$table->integer('Status')->nullable();
-		$table->timestamp('PostingDate')->useCurrent();
+		$table->string('messages')->nullable();
+		$table->integer('status')->nullable();
+        $table->timestamp('created_at')->nullable()->useCurrent();
+        $table->timestamp('updated_at')->nullable();
 
         });
     }

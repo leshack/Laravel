@@ -13,6 +13,7 @@ class CreateTblvehiclesTable extends Migration
 		$table->integer('id')->autoIncrement();
 		$table->string('VehiclesTitle')->nullable();
 		$table->integer('VehiclesBrand')->nullable();
+        $table->integer('booking_id')->nullable();
 		$table->text('VehiclesOverview');
 		$table->integer('PricePerDay')->nullable();
 		$table->string('FuelType')->nullable();

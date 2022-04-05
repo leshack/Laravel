@@ -1,7 +1,8 @@
 @extends('layouts.header')
 
-@include('includes.colorswitcher')
+
 @section('content')
+@include('includes.colorswitcher')
 @if ($errors->any())
     <div class="w-4/5 m-auto">
         <ul>
@@ -96,7 +97,7 @@
               @csrf
            <div class="form-group">
               <label class="control-label">Reg Date -</label>
-              {{Auth::user()->RegDate}}
+             {{ date('jS M Y', strtotime(Auth::user()->RegDate)) }}
             </div>
             <div class="form-group">
               <label class="control-label">Last Update at  -</label>

@@ -22,6 +22,9 @@ class TblcontactusinfoController extends Controller
                 ->with(' tblcontactusinfo',$tblcontactusinfo);
 
     }
+    public function contact(){
+        return view('Admin.contact.updatecontact');
+    }
 
     /**
      * Show the form for creating a new resource.

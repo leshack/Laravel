@@ -13,21 +13,17 @@ class TblbrandsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function createbrands()
     {
-       /* $tblbrands = DB::select('select * from tblbrands join tblvehicle');
-        return view('index',['tblbrands'=>$tblbrands]);
-        */
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+        return view ('Admin.brands.createbrands');
+    }
+    public function managebrands()
     {
-        //
+        $brands = Brands::all();
+        return view ('Admin.brands.managebrands', [
+            'brands' => $brands
+        ]);
     }
 
     /**
@@ -36,20 +32,18 @@ class TblbrandsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function add(Request $request)
     {
-        //
-    }
+        $validated = $request->validate([
+            'BrandName' => ['required', 'string', 'max:255'],
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        ]);
+        $brand = new Brands();
+
+        $brand->BrandName = $request->get('BrandName');
+        $brand->save();
+
+        return back()->with('success', 'Brand successfully created');
     }
 
     /**
@@ -60,7 +54,12 @@ class TblbrandsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $brand = Brands::findOrFail($id);
+        return view('Admin.brands.updatebrands')
+        ->with('brand', $brand);
+        //  or
+        //  return view('Admin.brands.updatebrands')
+        // ->with('brand', Brands::where('id', $id)->first());
     }
 
     /**
@@ -72,7 +71,14 @@ class TblbrandsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'BrandName' => ['required', 'string', 'max:255'],
+
+
+        ]);
+            Brands::whereId($id)->update($validatedData);
+
+        return back()->with('success', 'Brand successfully updated');
     }
 
     /**
@@ -81,8 +87,9 @@ class TblbrandsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        Brands::find($id)->delete();
+        return redirect()->route('admin.brandsmanage')->with('success', 'Brand successfully deleted');
     }
 }

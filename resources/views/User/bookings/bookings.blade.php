@@ -45,9 +45,9 @@
             <ul class="vehicle_listing">
             <li>
                 @foreach($tblvehicles as $tblvehicle)
-                <div class="vehicle_img"><a href="{{ route('vehicle-details')}}?vhid=<?php echo htmlentities($tblvehicle->vid);?>"><img src="{{url('images/Adminimages/vehicleimages/'.$tblvehicle->Vimage1)}}" alt="image"></a> </div>
+                <div class="vehicle_img"><a href="{{ route('vehicle-details')}}?vhid=<?php echo htmlentities($tblvehicle->id);?>"><img src="{{url('images/Adminimages/vehicleimages/'.$tblvehicle->Vimage1)}}" alt="image"></a> </div>
                 <div class="vehicle_title">
-                  <h6><a href="{{ route('vehicle-details')}}?vhid=<?php echo htmlentities($tblvehicle->vid);?>"> @foreach($tblvehicle->brands as $brand) <?php echo htmlentities($brand->BrandName);?> , @endforeach <?php echo htmlentities($tblvehicle->VehiclesTitle);?></a></h6>
+                  <h6>@foreach($tblvehicle->brands as $brand) <a href="{{ route('vehicle-details')}}?vhid=<?php echo htmlentities($brand->id);?>"><?php echo htmlentities($brand->BrandName);?>@endforeach ,<?php echo htmlentities($tblvehicle->VehiclesTitle);?></a></h6>
                   @foreach($tblvehicle->bookings as $booking)
                   <p><b>From Date:</b> <?php echo htmlentities($booking->FromDate);?><br/><b>To Date:</b> <?php echo htmlentities($booking->ToDate);?></p>
                 </div>

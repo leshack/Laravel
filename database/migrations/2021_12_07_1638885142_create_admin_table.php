@@ -8,18 +8,22 @@ class CreateAdminTable extends Migration
 {
     public function up()
     {
-        Schema::create('admin', function (Blueprint $table) {
+        Schema::create('admins', function (Blueprint $table) {
 
-		$table->integer('id');
-		$table->string('UserName');
-		$table->string('Password');
-		$table->timestamp('updationDate')->useCurrent();
+		$table->id;
+		$table->string('Username');
+		$table->string('password');
+        $table->string('email')->unique();
+        $table->string('picture')->nullable();
+        $table->string('skills')->nullable();
+        $table->timestamp('created_at')->useCurrent();
+        $table->timestamp('updated_at')->nullable();
 
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('admin');
+        Schema::dropIfExists('admins');
     }
 }

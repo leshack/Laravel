@@ -1,27 +1,29 @@
 @extends('layouts.header')
 
 @section('content')
-<div class="w-4/5 m-auto text-left">
+<div class="w-1/2 m-auto text-left">
     <div class="py-15">
         <h1 class="text-6xl">
             Create Post
         </h1>
     </div>
 </div>
-
 @if ($errors->any())
-    <div class="w-4/5 m-auto">
+<main class="sm:container sm:mx-auto sm:max-w-lg sm:mt-10">
         <ul>
             @foreach ($errors->all() as $error)
-                <li class="w-1/5 mb-4 text-gray-50 bg-red-700 rounded-2xl py-4">
+                <li class="text-xl text-red-700 bg-red-100 px-5 py-6 sm:rounded sm:border sm:border-red-400 sm:mb-6"
+                role="alert">
                     {{ $error }}
                 </li>
             @endforeach
         </ul>
     </div>
 @endif
-
-<div class="w-4/5 m-auto pt-20">
+   </main>
+<div class="form-group">
+    <span>
+<div class="w-1/2 m-auto pt-20">
     <form
         action="/blog"
         method="POST"
@@ -37,11 +39,11 @@
         <textarea
             name="description"
             placeholder="Description..."
-            class="py-20 bg-transparent block border-b-2 w-full h-60 text-xl outline-none"></textarea>
+            class="py-20 bg-transparent block border-b-2 w-full h-90 text-3xl outline-none"></textarea>
 
         <div class="bg-grey-lighter pt-15">
-            <label class="w-44 flex flex-col items-center px-2 py-3 bg-white-rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer">
-                <span class="mt-2 text-base leading-normal">
+            <label class="w-48 flex flex-col items-center px-2 py-3 bg-white-rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer">
+                <span class="mt-2 text-xl leading-normal">
                     Select a file
                 </span>
                 <input
@@ -50,13 +52,16 @@
                     class="hidden">
             </label>
         </div>
-
+        <div class="w-1/4 m-auto pt-20">
         <button
             type="submit"
-            class="uppercase mt-15 bg-blue-500 text-gray-100 text-lg font-extrabold py-4 px-8 rounded-3xl">
+            class="btn">
             Submit Post
         </button>
+        </div>
     </form>
+</div>
+    </span>
 </div>
 
 @endsection

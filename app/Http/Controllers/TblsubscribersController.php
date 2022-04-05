@@ -13,12 +13,17 @@ class TblsubscribersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {  
-       
+    {
+
             $tblsubscribers = DB::select('select * from tblsubscribers where SubscriberEmail=:subscriberemail');
             return view('index',compact('tblsubscribers'))
             ->with('tblsubscribers',$tblsubscribers);
-              
+
+    }
+
+    public function subscriber(){
+
+        return view('Admin.subscribers.managesubscriber');
     }
 
     /**
@@ -28,7 +33,7 @@ class TblsubscribersController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**

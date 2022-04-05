@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\VerifyUser;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -54,8 +58,9 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'phone'  => ['required', 'numeric', 'min:11',],
-           
+
         ]);
+
     }
 
     /**
@@ -64,14 +69,50 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    public function register(Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'phone' => $data['phone'],
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->phone = $request->phone;
+        $save = $user->save();
+        $last_id =$user->id;
 
-        ]);
+        $token = $last_id.hash('sha256',Str::random(120));
+        $verifyURL = route('verify',['token'=>$token,'service'=>'Email_verification']);
+
+        VerifyUser::create([
+              'user_id' => $last_id,
+              'token' => $token
+            ]);
+
+            // $message = 'Dear <b>'.$request->name.'</b>';
+            $message ='Thank you for signing up,we just need you to verify your email address to complete setting your
+            account.';
+
+            $mail_data =[
+                'recipient'=>$request->email,
+                'fromEmail'=>$request->email,
+                'fromName'=>env('MAIL_FROM_NAME'),
+                'subject'=>'Email verification',
+                'body'=>$message,
+                'actionLink'=>$verifyURL,
+
+            ];
+            Mail::send('includes.verifyemail-template',$mail_data,function($message) use ($mail_data){
+                $message->to($mail_data['recipient'])
+                        ->from($mail_data['fromEmail'],$mail_data['fromName'])
+                        ->subject($mail_data['subject']);
+            });
+            if( $save ){
+                return redirect()->back()->with('info', 'You need to verify you account .We have sent you an activation link,
+                please check your email');
+            }else{
+                return redirect()->back()->with('fail','something went wrong,failed to register');
+            }
     }
+
+
+
 }

@@ -91,12 +91,12 @@
             </div>
             <div cl
             <div class="form-group">
-              <label class="control-label">Password</label>
+              <label class="control-label">New Password</label>
               <input class="form-control white_bg" id="newpassword" type="text" name="newpassword" required>
               <span class="text-danger error-text newpassword_error"></span>
             </div>
             <div class="form-group">
-              <label class="control-label">Confirm Password</label>
+              <label class="control-label">Confirm New Password</label>
               <input class="form-control white_bg" id="confirmpassword" type="text" name="confirmpassword" required >
               <span class="text-danger error-text confirmpassword_error"></span>
             </div>

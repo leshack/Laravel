@@ -222,6 +222,50 @@ blockquote {
      -webkit-transition: all 0.3s linear 0s;
       -ms-transition: all 0.3s linear 0s;
 }
+.btn-google {
+    color: #888;
+    width: 100%;
+    background: #fff;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 3rem;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 2.75rem;
+    text-align: center;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border-radius: 0.375rem;
+    transition: all .1s ease-in;
+    border: 0.125rem solid #f0f1f2!important;
+    transition: none;
+    font-family: ch-icon!important;
+    speak: never;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+}
+.google-icon {
+    background: url(../images/google-icon.svg)0 100% no-repeat;
+    height: 24px;
+    width: 24px;
+    margin-right: 3rem;
+    margin-top: -1rem;
+}
+
+.mb-1, .my-1 {
+    margin-bottom: 1rem!important;
+}
 .btn .fa {
   font-size: 20px;
   margin-left: 5px;
@@ -1109,7 +1153,7 @@ nav.navbar {
 	3.1. Banner
 -------------------------------*/
 .banner-section {
-  background-image: url("../images/banner-image.jpg");
+  background-image: url("../images/banner1.jpg");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -1354,7 +1398,7 @@ nav.navbar {
 }
 .blog-info-box .share_article:hover ul li a:hover {
 	border-radius:50%;
-	color:#fa2837;
+	color:rgb(250, 40, 55);
 }
 .blog-info-box .share_article ul {
 	position:absolute;
@@ -3949,7 +3993,7 @@ table.info-tabel tr td {
 	color:#0777b6;
 }
 .google-plus-icon a, .google-plus-icon a:hover {
-	color:#dd4a3a;
+	color:#4d4948;
 }
 .dealer_contact_info {
 	padding:12px 18px;

@@ -53,5 +53,13 @@ class PagesController extends Controller
 
 
     }
-
+    public function managepage()
+    {
+        $type=$_GET['type'];
+        $sql= 'Select  detail from tblpages where type = :type';
+        $tblpages = DB::select($sql,['type' => $type]);
+        return view('Admin.pages.managepage',compact('tblpages', 'type'))
+        ->with('tblpages', $tblpages)
+        ->with('type', $type);
+    }
 }

@@ -9,6 +9,9 @@ use App\Models\User;
 use App\Models\Vehicle;
 use App\Models\Bookings;
 use App\Models\Testimonial;
+use App\Models\VerifyUser;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Validator\validateEmail;
@@ -52,14 +55,12 @@ class ProfileController extends Controller
 
     }
 
-
-
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
     }
@@ -115,6 +116,7 @@ class ProfileController extends Controller
             'address' => ['required', 'string'],
             'city'  => ['required', 'string', 'max:100'],
             'country' => ['required', 'string', 'max:105'],
+            'user_image' => 'required|mimes:jpg,png,jpeg|max:5048',
             'RegDate' => ['required', 'timestamp'],
             'UpdationDate' => ['required','timestamp'],
 
@@ -131,6 +133,7 @@ class ProfileController extends Controller
                 'address'=>$request->address,
                 'city'=>$request->city,
                 'country'=>$request->country,
+                'image_image' => $request->hasFile('user_image'),
                 'RegDate'=>$request->RegDate,
                 'UpdationDate'=>$request->UpdationDate,
             ]);
@@ -143,36 +146,38 @@ class ProfileController extends Controller
 
     }
     function updatePicture(Request $request){
-        $path = 'images/usersprofilepic/';
-      //$file = $request->hasFile('user_image');
-        $new_name = 'UIMG_'.date('Ymd').uniqid().'.jpg';
+        if($request->hasFile('user_image')){
+            $path = 'images/usersprofilepic/';
+            $file = $request->file('user_image');
+            $new_name = 'UIMG_'.date('Ymd').uniqid().'.jpg';
 
 
         //Upload new image
-      //$upload = $file->move(public_path($path), $new_name);
-      $upload =  $request->user_image->move(public_path($path), $new_name);
+      $upload = $file->move(public_path($path), $new_name);
+      //$upload =  $request->user_image->move(public_path($path), $new_name);
 
-        if( !$upload ){
-            return response()->json(['status'=>0,'msg'=>'Something went wrong, upload new picture failed.']);
-        }else{
-            //Get Old picture
-            $oldPicture = User::find(Auth::user()->id)->getAttributes()['picture'];
+      if( !$upload ){
+          return response()->json(['status'=>0,'msg'=>'Something went wrong, upload new picture failed.']);
+      }else{
+          //Get Old picture
+          $oldPicture = User::find(Auth::user()->id)->getAttributes()['picture'];
 
-            if( $oldPicture != '' ){
-                if( File::exists(public_path($path.$oldPicture))){
-                    File::delete(public_path($path.$oldPicture));
-                }
-            }
+          if( $oldPicture != '' ){
+              if( File::exists(public_path($path.$oldPicture))){
+                  File::delete(public_path($path.$oldPicture));
+              }
+          }
 
-            //Update DB
-            $update = User::find(Auth::user()->id)->update(['picture'=>$new_name]);
+          //Update DB
+          $update = User::find(Auth::user()->id)->update(['picture'=>$new_name]);
 
-            if( !$upload ){
-                return response()->json(['status'=>0,'msg'=>'Something went wrong, updating picture in db failed.']);
-            }else{
-                return response()->json(['status'=>1,'msg'=>'Your profile picture has been updated successfully']);
-            }
+          if( !$upload ){
+              return response()->json(['status'=>0,'msg'=>'Something went wrong, updating picture in db failed.']);
+          }else{
+              return response()->json(['status'=>1,'msg'=>'Your profile picture has been updated successfully']);
+          }
 
+      }
         }
 
     }
@@ -221,13 +226,34 @@ class ProfileController extends Controller
             'user_id' => 'string','numeric'.Auth::user()->id
         ]);
         $testimonial = new Testimonial;
-        $testimonial->email =$request->email.Auth::user()->email;
+        $testimonial->email =$request->email.Auth::user()->id;
         $testimonial->Testimonial = $request->Testimonial;
         $testimonial->user_id =$request->user_id.Auth::user()->id;
 
         $testimonial->save();
 
         return back()->with('success', 'Testimonail submitted successfully');
+    }
+
+    public function  booking(Request $request) {
+        $this->validate($request, [
+            'email'=> 'email|unique:users,email,'.Auth::user()->id,
+            'FromDate'=>'required','string',
+            'ToDate'=>'required','string',
+            'message'=>'required', 'string', 'max:200',
+            'user_id' => 'string','numeric'.Auth::user()->id
+        ]);
+        $bookings = new Bookings;
+        $bookings->email =$request->email.Auth::user()->id;
+        $bookings->FromDate =$request->FromDate;
+        $bookings->ToDate =$request->ToDate;
+        $bookings->messages =$request->message;
+        $bookings->user_id =$request->user_id.Auth::user()->id;
+
+        $bookings->save();
+
+        return back()->with('success', 'Bookings submitted successfully');
+
     }
 
     /**

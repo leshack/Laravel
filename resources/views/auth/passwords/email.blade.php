@@ -6,7 +6,7 @@
         <div class="w-full">
 
             @if (session('status'))
-            <div class="text-sm text-green-700 bg-green-100 px-5 py-6 sm:rounded sm:border sm:border-green-400 sm:mb-6"
+            <div class="text-xl text-green-700 bg-green-100 px-5 py-6 sm:rounded sm:border sm:border-green-400 sm:mb-6"
                 role="alert">
                 {{ session('status') }}
             </div>
@@ -21,16 +21,16 @@
                     @csrf
 
                     <div class="flex flex-wrap">
-                        <label for="email" class="block text-gray-700 text-xl font-bold mb-2 sm:mb-4">
+                        <label for="email" class="block text-gray-700 text-2xl font-bold mb-2 sm:mb-4">
                             {{ __('E-Mail Address') }}:
                         </label>
 
                         <input id="email" type="email"
-                            class="form-input w-full @error('email') border-red-500 @enderror" name="email"
+                            class="text-2xl form-input w-full @error('email') border-red-500 @enderror" name="email"
                             value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                         @error('email')
-                        <p class="text-red-500 text-xs italic mt-4">
+                        <p class="text-red-500 text-xl italic mt-4">
                             {{ $message }}
                         </p>
                         @enderror
@@ -42,7 +42,7 @@
                             {{ __('Send Password Reset Link') }}
                         </button>
 
-                        <p class="mt-4 text-base text-blue-500 hover:text-blue-700 whitespace-no-wrap no-underline hover:underline sm:text-base sm:order-0 sm:m-0">
+                        <p class="mt-4 text-base text-blue-500 hover:text-blue-700 whitespace-no-wrap no-underline hover:underline sm:text-xl sm:order-0 sm:m-0">
                             <a class="text-blue-500 hover:text-blue-700 no-underline" href="{{ route('login') }}">
                                 {{ __('Back to login') }}
                             </a>

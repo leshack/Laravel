@@ -10,13 +10,14 @@ class CreateTbltestimonialTable extends Migration
     {
         Schema::create('tbltestimonial', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
+            $table->unsignedBigInteger('user_id')->nullable()->index('user_id')->foreign()->references('id')->on('users');
             $table->string('email');
             $table->mediumText('Testimonial');
-            $table->integer('status')->nullable();
+            $table->boolean('status')->detault('0');
             $table->timestamp('PostingDate')->useCurrent();
             $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at');
-            $table->unsignedBigInteger('user_id')->nullable()->index('user_id')->foreign()->references('id')->on('users');
+            $table->timestamp('updated_at')->nullable();
+
 
 
         });
