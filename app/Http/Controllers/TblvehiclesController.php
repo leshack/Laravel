@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Vehicle;
+use App\Models\Brands;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -20,9 +21,9 @@ class TblvehiclesController extends Controller
     {
 
        // return view('Admin.vehicles.postvehicle');
-        $tblvehicles = Vehicle::with(['brands.vehicle',/*'brands:id'*/])->get();
-        return  view('Admin.vehicles.postvehicle',compact('tblvehicles'))
-            ->with('tblvehicles', $tblvehicles);
+        $brands = Brands::all();
+        return  view('Admin.vehicles.postvehicle',compact('brands'))
+            ->with('brands', $brands);
 
     }
     public function managevehicle()

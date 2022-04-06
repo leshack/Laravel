@@ -57,11 +57,11 @@
               <a href="tel:+254741704681">+254741704681</a> </div>
             <div class="social-follow">
               <ul>
-                <li><a href="https://code-projects.org/"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
-                <li><a href="https://code-projects.org/"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
-                <li><a href="https://code-projects.org/"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
-                <li><a href="https://code-projects.org/"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a></li>
-                <li><a href="https://code-projects.org/"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
               </ul>
             </div>
 
@@ -171,6 +171,87 @@
      </div>
     </div>
     </body>
+{{-- CUSTOM JS CODES --}}
+<script>
+
+    $.ajaxSetup({
+       headers:{
+         'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+       }
+    });
+
+    $(function(){
+
+      /* UPDATE USER PERSONAL INFO */
+      $(document).on('click','#change_picture_btn', function(){
+        $('#user_image').click();
+      });
+
+
+      $('#user_image').ijaboCropTool({
+            preview : '.user_picture',
+            setRatio:1,
+            allowedExtensions: ['jpg', 'jpeg','png'],
+            buttonsText:['CROP','QUIT'],
+            buttonsColor:['#30bf7d','#ee5155', -15],
+            processUrl:'{{ route("user.profilepic") }}',
+            // withCSRF:['_token','{{ csrf_token() }}'],
+            onSuccess:function(message, element, status){
+               alert(message);
+            },
+            onError:function(message, element, status){
+              alert(message);
+            }
+         });
+
+
+    });
+
+  </script>
+  <script>
+
+    $.ajaxSetup({
+       headers:{
+         'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+       }
+    });
+
+    $(function(){
+
+      /* UPDATE USER PERSONAL INFO */
+      $('#Profileform').on('submit',function(e){
+         e.preventDefault();
+
+         $.ajax({
+            url:$(this).attr('action'),
+            method:$(this).attr('method'),
+            data:new FormData(this),
+            processData:false,
+            dataType:'json',
+            contentType:false,
+            beforeSend:function(){
+              $(document).find('span.error-text').text('');
+            },
+            success:function(data){
+              if(data.status == 0){
+                $.each(data.error, function(prefix, val){
+                  $('span.'+prefix+'_error').text(val[0]);
+                });
+              }else{
+                 $('#Profileform')[0].reset();
+            //   $('.admin_name').each(function()){
+            //       $(this).html( $('#AdminInfoForm').find( $('input[name="name"]')).val() );
+            //   });
+                alert(data.msg);
+              }
+            }
+         });
+      });
+
+
+    });
+
+  </script>
 </html>
 
 

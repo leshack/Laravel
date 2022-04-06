@@ -80,7 +80,7 @@
                                          echo htmlentities('Cancelled');
                                      }
                                                                             ?></td>
-                                <td>{{$booking->created_at}}</td>
+                                <td>{{date('jS M Y', strtotime($booking->created_at))}}</td>
                                 <td>
                                     <a href="{{URL:: to('admin/bookings/confirm/'.$booking->id)}}" onclick="return confirm('Do you want to confirm booking?');"><em class="fa fa-edit"></em> </a>
                                     <a href="{{URL:: to('admin/bookings/cancel/'.$booking->id)}}" onclick="return confirm('Do you want to cancel booking?');"><em class="fa fa-trash"></em> </a>

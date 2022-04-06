@@ -59,8 +59,8 @@
                             <tr>
                                 <td>{{$brand->id}}</td>
                                 <td>{{$brand->BrandName}}</td>
-                                <td>{{$brand->created_at}}</td>
-                                <td>{{$brand->updated_at}}</td>
+                                <td>{{date('jS M Y', strtotime($brand->created_at))}}</td>
+                                <td>{{date('jS M Y', strtotime($brand->updated_at))}}</td>
                                 <td>
                                     <a href="{{URL:: to('admin/managevehicles/edit/'.$brand->id)}}"><em class="fa fa-edit"></em> </a>
                                     <a href="{{URL:: to('admin/managevehicles/delete/'.$brand->id)}}" onclick="return confirm('Do you want to delete brand?');"><em class="fa fa-trash"></em> </a>

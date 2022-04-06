@@ -41,16 +41,26 @@ class ProfileController extends Controller
         return view('User.testimonial.testimonial');
     }
     public function mytestimonial(){
-        $tbltestimonial = Testimonial::with(['user.testimonial','user:name'])->get();
+        $tbltestimonial = DB::table("tbltestimonial")
+        ->where("email", "=", Auth()->user()->email)
+        ->get();
         return view('User.testimonial.mytestimonial',compact('tbltestimonial'))
                 ->with('tbltestimonial', $tbltestimonial);
     }
 
-    public function bookings(){
-        $tblvehicles = Vehicle::with(['brands.vehicle','bookings.vehicle'])->get();
-        $tblbookings = Bookings::with(['user.bookings'])->get();
-        return view('User.bookings.bookings',compact('tblvehicles','tblbookings'))
-            ->with('tblvehicles', $tblvehicles)
+    public function bookings(Request $request){
+
+        $tblbookings = DB::table("tblbookings")
+        ->join("tblvehicles", function($join){
+            $join->on("tblbookings.vehicle_id", "=", "tblvehicles.id");
+        })
+        ->join("tblbrands", function($join){
+            $join->on("tblbrands.id", "=", "tblvehicles.VehiclesBrand");
+        })
+        ->select("tblvehicles.Vimage1 as Vimage1", "tblvehicles.VehiclesTitle", "tblvehicles.id as id", "tblbrands.BrandName", "tblbookings.FromDate", "tblbookings.ToDate", "tblbookings.messages", "tblbookings.status")
+        ->where("tblbookings.email", "=", Auth()->user()->email)
+        ->get();
+        return view('User.bookings.bookings',compact('tblbookings'))
             ->with('tblbookings', $tblbookings);
 
     }
@@ -112,18 +122,18 @@ class ProfileController extends Controller
             'email'=> 'required|email|unique:users,email,'.Auth::user()->id,
            // 'password' => ['required', 'string', 'min:8', 'confirmed'],
             'phone'  => ['required', 'numeric', 'min:11', 'unique:users'],
-            'Dob'    => ['required', 'string', 'max:100', 'unique:users'],
+            'Dob'    => ['required', 'date', 'max:100'],
             'address' => ['required', 'string'],
             'city'  => ['required', 'string', 'max:100'],
             'country' => ['required', 'string', 'max:105'],
-            'user_image' => 'required|mimes:jpg,png,jpeg|max:5048',
-            'RegDate' => ['required', 'timestamp'],
-            'UpdationDate' => ['required','timestamp'],
+            // 'user_image' => 'required|mimes:jpg,png,jpeg|max:5048',
+            'RegDate' => ['timestamp'],
+            'UpdationDate' => ['timestamp'],
 
         ]);
 
-        if(!$validator->fails()){
-            return back()->with(['errors'=>$validator->errors()->toArray()]);
+        if($validator->fails()){
+            return response()->json(['status'=>0,'error'=>$validator->errors()->toArray()]);
         }else{
              $query = User::find(Auth::user()->id)->update([
                 'name'=>$request->name,
@@ -133,14 +143,14 @@ class ProfileController extends Controller
                 'address'=>$request->address,
                 'city'=>$request->city,
                 'country'=>$request->country,
-                'image_image' => $request->hasFile('user_image'),
+                // 'image_image' => $request->hasFile('user_image'),
                 'RegDate'=>$request->RegDate,
                 'UpdationDate'=>$request->UpdationDate,
             ]);
             if(!$query){
-                return back()->with('errors', 'Something went Wrong"');
+                return response()->json(['status'=>0,'msg'=>'Something went wrong, updating profile in db failed.']);
             }else{
-                return back()->with('success', 'Your Profile info has Updated Successfully"');
+                return response()->json(['status'=>1,'msg'=>'Your profile has been updated successfully']);
             }
        }
 

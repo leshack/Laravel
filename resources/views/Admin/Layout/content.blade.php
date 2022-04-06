@@ -28,7 +28,7 @@
           <!-- small box -->
           <div class="small-box bg-info">
             <div class="inner">
-              <h3>5</h3>
+              <h3>{{ $users->count() }}</h3>
 
               <p>Registered Users</p>
             </div>
@@ -43,7 +43,7 @@
           <!-- small box -->
           <div class="small-box bg-success">
             <div class="inner">
-              <h3>5<sup style="font-size: 20px"></sup></h3>
+              <h3>{{ $vehicles->count() }}<sup style="font-size: 20px"></sup></h3>
 
               <p>Listed Vehicles</p>
             </div>
@@ -58,7 +58,7 @@
           <!-- small box -->
           <div class="small-box bg-warning">
             <div class="inner">
-              <h3>5</h3>
+              <h3>{{ $bookings->count() }}</h3>
 
               <p>Total Bookings</p>
             </div>
@@ -73,7 +73,7 @@
           <!-- small box -->
           <div class="small-box bg-danger">
             <div class="inner">
-              <h3>65</h3>
+              <h3>{{ $brands->count() }}</h3>
 
               <p>Listed Brands</p>
             </div>
@@ -103,7 +103,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>2</h3>
+                <h3>{{ $testimonial->count() }}</h3>
 
                 <p>Testimonial</p>
               </div>
@@ -133,7 +133,7 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>1</h3>
+                <h3>{{ $blogs->count() }}</h3>
 
                 <p>Blogs</p>
               </div>

@@ -11,10 +11,16 @@ use App\Models\Bookings;
 
 class PagesController extends Controller
 {
-    public function index()
+    public function index($tid=1)
     {
         $tblvehicles = Vehicle::with(['brands.vehicle',/*'brands:id'*/])->get();
-        $tbltestimonial = Testimonial::with(['user.testimonial','user:name'])->get();
+        $tbltestimonial = DB::table("tbltestimonial")
+        ->join("users", function($join){
+            $join->on("tbltestimonial.email", "=", "users.email");
+        })
+        ->select("tbltestimonial.Testimonial", "users.name")
+        ->where("tbltestimonial.status", "=", $tid)
+        ->get();
         $tblbookings = Bookings::with(['user.bookings'])->get();
         return view('index',compact('tblvehicles','tbltestimonial','tblbookings'))
             ->with('tblvehicles', $tblvehicles)->with('tbltestimonial', $tbltestimonial)
@@ -53,13 +59,19 @@ class PagesController extends Controller
 
 
     }
-    public function managepage()
+    public function managepage(Request $request)
     {
-        $type=$_GET['type'];
-        $sql= 'Select  detail from tblpages where type = :type';
-        $tblpages = DB::select($sql,['type' => $type]);
-        return view('Admin.pages.managepage',compact('tblpages', 'type'))
-        ->with('tblpages', $tblpages)
-        ->with('type', $type);
+        // $type = $_GET['type'];
+       // $sql= 'Select  detail from tblpages where type = :type';
+
+       $pages = DB::table("tblpages")
+       ->select("detail")
+       ->where("type", "=", $request->type)
+       ->get();
+        // DB::select($sql,['type' => $type]);
+        return view('Admin.pages.managepage',[
+            'pages' => $pages,
+            // 'type' => $type
+        ]);
     }
 }

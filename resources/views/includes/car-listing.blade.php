@@ -38,7 +38,7 @@
             </div>
             <div class="product-listing-content">
               <h5><a href="{{ route('vehicle-details')}}?vhid=<?php echo htmlentities($tblvehicle->id);?>">@foreach($tblvehicle->brands as $brand)<?php echo htmlentities($brand->BrandName);?> @endforeach, <?php echo htmlentities($tblvehicle->VehiclesTitle);?></a></h5>
-              <p class="list-price">$<?php echo htmlentities($tblvehicle->PricePerDay);?> Per Day</p>
+              <p class="list-price"><?php echo htmlentities($tblvehicle->PricePerDay);?> Ksh Per/Day</p>
               <ul>
                 <li><i class="fa fa-user" aria-hidden="true"></i><?php echo htmlentities($tblvehicle->SeatingCapacity);?> seats</li>
                 <li><i class="fa fa-calendar" aria-hidden="true"></i><?php echo htmlentities($tblvehicle->ModelYear);?> model</li>

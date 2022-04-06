@@ -50,38 +50,45 @@
              <div class="">
                     <select name="menu1" onChange="MM_jumpMenu('parent',this,0)">
                     <option value="" selected="selected" class="form-control">***Select One***</option>
-                    <option value="manage-pages.php?type=terms">Terms and Condition</option>
-                    <option value="manage-pages.php?type=privacy">Privacy and Policy</option>
-                    <option value="manage-pages.php?type=aboutus">About us</option>
-                    <option value="manage-pages.php?type=faqs">FAQs</option>
+                    <option value="{{ route('admin.managepage')}}?type=terms">Terms and Condition</option>
+                    <option value="{{ route('admin.managepage')}}?type=Privacy">Privacy and Policy</option>
+                    <option value="{{ route('admin.managepage')}}?type=aboutus">About us</option>
+                    <option value="{{ route('admin.managepage')}}?type=faqs">FAQs</option>
                     </select>
                 </div>
             </div>
             <div class="hr-dashed"></div>
 
             <div class="form-group">
-                <label class="col-sm-4 control-label">selected Page</label>
-                <div class="col-sm-8">
-                    @switch('type')
-                        @case('terms')
-                       <?php echo "Terms and Conditions"; ?>
-                            @break
+                <label>selected Page</label>
+                <div class="">
+                    <?php
 
-                        @case('privacy')
-                       <?php echo "Privacy And Policy"; ?>
-                            @break
+                    switch($_GET['type'])
+                    {
+                        case "terms" :
+                            echo "Terms and Conditions";
+                            break;
 
-                        @case('About us')
-                        <?php echo "About US"; ?>
-                            @break
+                        case "Privacy" :
+                            echo "Privacy And Policy";
+                            break;
 
-                        @case('FAQs')
-                        <?php echo "FAQs"; ?>
-                            @break
+                        case "aboutus" :
+                            echo "About US";
+                            break;
 
-                        @default
-                            <?php echo ""; ?>
-                    @endswitch
+                        case "faqs" :
+                            echo "FAQs";
+                            break;
+
+                        default :
+                            echo "";
+                            break;
+
+                    }
+
+                    ?>
                 </div>
             </div>
             <!-- Main content -->
@@ -91,17 +98,27 @@
                     <div class="card card-outline card-info">
                     <div class="card-header">
                         <h3 class="card-title">
-                       Page Details
+                       Summernotes
                         </h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
                         <textarea id="summernote">
-                            @foreach ($tblpages as  $page)
-                                <?php echo htmlentities($result->detail);?>
+                            @foreach ($pages as  $page)
+                        <div id="summernote">{{$page->detail }}</div>
                             @endforeach
                         </textarea>
                     </div>
+                      {{-- buttons --}}
+                        <div class="row row d-flex justify-content-center align-content-center">
+                            <div class=" text-center" >
+                    <div class="form-group">
+                        <div class=" text-center">
+                            <button class="btn btn-primary" name="submit" type="submit">update page</button>
+                        </div>
+                    </div>
+                </div>
+                        </div>
                     <div class="card-footer">
                         Visit <a href="https://github.com/summernote/summernote/">Summernote</a> documentation for more examples and information about the plugin.
                     </div>

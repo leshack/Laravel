@@ -39,7 +39,7 @@ class TblcontactusqueryController extends Controller
     {
         $this->validate($request, [
             'name' => ['required'],
-            'email' => ['required', 'string','email:rfc,dns', 'max:255',],
+            'email' => ['required', 'string','email:rfc,dns', 'max:255'],
             'phone_number' => ['required','numeric', 'min:11'],
             'subject' => ['required'],
             'message' => ['required'],

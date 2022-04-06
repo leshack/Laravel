@@ -17,6 +17,7 @@ use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\AdminprofileController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\LockAccountScreenController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\TblbookingsController;
 use App\Http\Controllers\RegusersController;
@@ -55,7 +56,7 @@ Route::get('verify',[LoginController::class,'verify'])->name('verify');
 Route::group(['prefix'=>'user', 'middleware'=>['auth','is_user_verify_email']], function(){
     Route::get('/', [PagesController::class, 'index'])->name('index');
     Route::get('profile',[ProfileController::class,'profile'])->name('user.profile');
-    Route::post('profile',[ProfileController::class,'updateInfo'])->name('user.profile');
+    Route::post('update_profile_info',[ProfileController::class,'updateInfo'])->name('user.updateprofile');
     Route::post('profile',[ProfileController::class,'updatePicture'])->name('user.profilepic');
     Route::get('password',[ProfileController::class,'password'])->name('user.password');
     Route::post('password',[ProfileController::class,'changepassword'])->name('user.passwordchange');
@@ -75,9 +76,10 @@ Route::post('admin', [AdminAuthController::class,'postLogin'])->name('admin.logi
 
         // Admin Dashboard
 Route::group(['prefix' => 'admin','middleware' => ['adminauth',]], function () {
-    Route::get('dashboard', function () {
-        return view('Admin.Layout.content');
-    })->name('admin.dashboard');
+    // Route::get('dashboard', function () {
+    //     return view('Admin.Layout.content');
+    // })->name('admin.dashboard');
+    Route::get('dashboard',[DashboardController::class,'dashboard'])->name('admin.dashboard');
                         //Lockscreen
     Route::get('lockscreen',[LockAccountScreenController::class,'lockscreen'])->name('admin.lockscreen');
     Route::post('lockscreen',[LockAccountScreenController::class,'unlock'])->name('admin.unlock');
@@ -104,7 +106,7 @@ Route::group(['prefix' => 'admin','middleware' => ['adminauth',]], function () {
     Route::post('bookings/confirm/{id}',[TblbookingsController::class,'update'])->name('admin.bookings/confirm/{id}');
 
     Route::get('users',[RegusersController::class,'regusers'])->name('admin.regusers');
-    Route::get('Page',[PagesController::class,'managepage'])->name('admin.managepage');
+    Route::get('pages',[PagesController::class,'managepage'])->name('admin.managepage');
     Route::get('contact',[TblcontactusinfoController::class,'contact'])->name('admin.contact');
     Route::get('subscriber',[TblsubscribersController::class,'subscriber'])->name('admin.subscriber');
                         //profile

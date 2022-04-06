@@ -215,12 +215,12 @@
                 <div class="form-group">
                     <?php if($vehicle->AirConditioner==1)
                         {?>
-                        <div class="checkbox checkbox-inline">
+                       <div class=" checkbox-inline">
                         <input type="checkbox" id="AirConditioner" name="AirConditioner" checked value="1">
                         <label for="AirConditioner"> Air Conditioner </label>
                         </div>
                         <?php } else { ?>
-                        <div class="checkbox checkbox-inline">
+                       <div class=" checkbox-inline">
                             <input type="checkbox" id="AirConditioner" name="AirConditioner"  value="1">
                             <label for="AirConditioner"> Air Conditioner </label>
                             </div>
@@ -230,12 +230,12 @@
                 <div class="form-group">
                     <?php if($vehicle->PowerSteering==1)
                         {?>
-                        <div class="checkbox checkbox-inline">
+                       <div class=" checkbox-inline">
                         <input type="checkbox" id="PowerSteering" name="PowerSteering" checked value="1">
                         <label for="PowerSteering"> Power Steering </label>
                         </div>
                         <?php } else { ?>
-                        <div class="checkbox checkbox-inline">
+                       <div class=" checkbox-inline">
                             <input type="checkbox" id="PowerSteering" name="PowerSteering" value="1">
                             <label for="PowerSteering"> Power Steering </label>
                             </div>
@@ -244,12 +244,12 @@
                 <div class="form-group">
                     <?php if($vehicle->CDPlayer==1)
                         {?>
-                        <div class="checkbox checkbox-inline">
+                       <div class=" checkbox-inline">
                             <input type="checkbox" id="CDPlayer" name="CDPlayer" checked value="1">
                             <label for="CDPlayer"> CD Player </label>
                         </div>
                         <?php } else { ?>
-                            <div class="checkbox checkbox-inline">
+                           <div class=" checkbox-inline">
                                 <input type="checkbox" id="CDPlayer" name="CDPlayer" value="1">
                                 <label for="CDPlayer"> CD Player </label>
                             </div>
@@ -261,12 +261,12 @@
                 <div class="form-group">
                     <?php if($vehicle->PowerDoorLocks==1)
                     {?>
-                        <div class="checkbox checkbox-inline">
+                       <div class=" checkbox-inline">
                         <input type="checkbox" id="PowerDoorLocks" name="PowerDoorLocks" checked value="1">
                         <label for="PowerDoorLocks"> Power Door Locks </label>
                         </div>
                         <?php } else { ?>
-                        <div class="checkbox checkbox-inline">
+                       <div class=" checkbox-inline">
                             <input type="checkbox" id="PowerDoorLocks" name="PowerDoorLocks" value="1">
                             <label for="PowerDoorLocks"> Power Door Locks </label>
                             </div>
@@ -277,12 +277,12 @@
                 <div class="form-group">
                     <?php if($vehicle->DriverAirbag==1)
                     {?>
-                        <div class="checkbox checkbox-inline">
+                       <div class=" checkbox-inline">
                         <input type="checkbox" id="DriverAirbag" name="DriverAirbag" checked value="1">
                         <label for="DriverAirbag">Driver Airbag</label>
                         </div>
                         <?php } else { ?>
-                        <div class="checkbox checkbox-inline">
+                       <div class=" checkbox-inline">
                             <input type="checkbox" id="DriverAirbag" name="DriverAirbag"  value="1">
                             <label for="DriverAirbag">Driver Airbag</label>
                             </div>
@@ -291,12 +291,12 @@
                 <div class="form-group">
                     <?php if($vehicle->CentralLocking==1)
                     {?>
-                        <div class="checkbox checkbox-inline">
+                       <div class=" checkbox-inline">
                             <input type="checkbox" id="CentralLocking" name="CentralLocking" checked value="1">
                             <label for="CentralLocking">Central Locking</label>
                         </div>
                         <?php } else { ?>
-                            <div class="checkbox checkbox-inline">
+                           <div class=" checkbox-inline">
                                 <input type="checkbox" id="CentralLocking" name="CentralLocking" value="1">
                                 <label for="CentralLocking">Central Locking</label>
                             </div>
@@ -315,12 +315,12 @@
             <div class="form-group">
                 <?php if($vehicle->AntiLockBrakingSystem==1)
                 {?>
-                <div class="checkbox checkbox-inline">
+               <div class=" checkbox-inline">
                 <input type="checkbox" id="AntiLockBrakingSystem" name="AntiLockBrakingSystem" checked value="1">
                 <label for="AntiLockBrakingSystem"> AntiLock Braking System </label>
                 </div>
                 <?php } else { ?>
-                <div class="checkbox checkbox-inline">
+               <div class=" checkbox-inline">
                     <input type="checkbox" id="AntiLockBrakingSystem" name="AntiLockBrakingSystem" value="1">
                     <label for="AntiLockBrakingSystem"> AntiLock Braking System </label>
                     </div>
@@ -329,12 +329,12 @@
             <div class="form-group">
                 <?php if($vehicle->DriverAirbag==1)
                 {?>
-                <div class="checkbox checkbox-inline">
+               <div class=" checkbox-inline">
                     <input type="checkbox" id="PassegerAirbag" name="PassegerAirbag" checked value="1">
                     <label for="PassegerAirbag"> Passenger Airbag </label>
                 </div>
                 <?php } else { ?>
-                    <div class="checkbox checkbox-inline">
+                   <div class=" checkbox-inline">
                         <input type="checkbox" id="PassegerAirbag" name="PassegerAirbag" value="1">
                         <label for="PassegerAirbag"> Passenger Airbag </label>
                     </div>
@@ -343,12 +343,12 @@
             <div class="form-group">
                 <?php if($vehicle->CrashSensor==1)
                 {?>
-                <div class="checkbox checkbox-inline">
+               <div class=" checkbox-inline">
                     <input type="checkbox" id="CrashSensor" name="CrashSensor" checked value="1">
                     <label for="CrashSensor"> Crash Sensor </label>
                 </div>
                 <?php } else { ?>
-                    <div class="checkbox checkbox-inline">
+                   <div class=" checkbox-inline">
                         <input type="checkbox" id="CrashSensor" name="CrashSensor" value="1">
                         <label for="CrashSensor"> Crash Sensor </label>
                     </div>
@@ -359,12 +359,12 @@
             <div class="form-group">
                 <?php if($vehicle->BrakeAssist==1)
                 {?>
-                <div class="checkbox checkbox-inline">
+               <div class=" checkbox-inline">
                     <input type="checkbox" id="BrakeAssit" name="BrakeAssit" checked value="1">
                     <label for="BrakeAssit"> Brake Assist </label>
                 </div>
                 <?php } else { ?>
-                    <div class="checkbox checkbox-inline">
+                   <div class=" checkbox-inline">
                         <input type="checkbox" id="BrakeAssit" name="BrakeAssit" value="1">
                         <label for="BrakeAssit"> Brake Assist </label>
                     </div>
@@ -374,12 +374,12 @@
             <div class="form-group">
                 <?php if($vehicle->PowerWindows==1)
                 {?>
-                    <div class="checkbox checkbox-inline">
+                   <div class=" checkbox-inline">
                         <input type="checkbox" id="PowerWindows" name="PowerWindows" checked value="1">
                         <label for="PowerWindows"> Power Windows </label>
                     </div>
                     <?php } else { ?>
-                        <div class="checkbox checkbox-inline">
+                       <div class=" checkbox-inline">
                             <input type="checkbox" id="PowerWindows" name="PowerWindows" value="1">
                             <label for="PowerWindows"> Power Windows </label>
                         </div>
@@ -388,12 +388,12 @@
             <div class="form-group">
                 <?php if($vehicle->CrashSensor==1)
                 {?>
-                    <div class="checkbox checkbox-inline">
+                   <div class=" checkbox-inline">
                         <input type="checkbox" id="LeatherSeats" name="LeatherSeats" checked value="1">
                         <label for="LeatherSeats"> Leather Seats </label>
                     </div>
                     <?php } else { ?>
-                    <div class="checkbox checkbox-inline">
+                   <div class=" checkbox-inline">
                         <input type="checkbox" id="LeatherSeats" name="LeatherSeats" value="1">
                         <label for="LeatherSeats"> Leather Seats </label>
                     </div>
@@ -408,10 +408,10 @@
 
           </div>
           {{-- buttons --}}
-          <div class="row justify-content-center">
-            <div class="col-md-6 " >
-      <div class="form-group">
-        <div class="col-sm-8 col-sm-offset-2">
+          <div class="row row d-flex justify-content-center align-content-center">
+            <div class=" text-center" >
+    <div class="form-group">
+        <div class=" text-center">
             <button class="btn btn-default" type="reset">Cancel</button>
             <button class="btn btn-primary" name="submit" type="submit">Save</button>
         </div>

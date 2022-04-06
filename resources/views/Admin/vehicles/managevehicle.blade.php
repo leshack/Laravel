@@ -48,8 +48,8 @@
                 <thead>
                 <tr>
                   <th style="width: 10px">#</th>
-                  <th>Vehicle Tittle</th>
                   <th>Brand</th>
+                  <th>Vehicle Tittle</th>
                   <th>Price per Day</th>
                   <th>Fuel Type</th>
                   <th>Model Year</th>
@@ -61,8 +61,8 @@
 
                             <tr>
                                 <td>{{$vehicle->id}}</td>
-                                <td>{{$vehicle->VehiclesTitle}}</td>
                                 <td>{{$vehicle->BrandName}}</td>
+                                <td>{{$vehicle->VehiclesTitle}}</td>
                                 <td>{{$vehicle->PricePerDay}}</td>
                                 <td>{{$vehicle->FuelType}}</td>
                                 <td>{{$vehicle->ModelYear}}</td>
@@ -77,8 +77,8 @@
                 <tfoot>
                 <tr>
                     <th>#</th>
-                    <th>Vehicle Tittle</th>
                     <th>Brand</th>
+                    <th>Vehicle Tittle</th>
                     <th>Price per Day</th>
                     <th>Fuel Type</th>
                     <th>Model Year</th>

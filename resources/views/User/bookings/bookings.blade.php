@@ -44,20 +44,19 @@
           <div class="my_vehicles_list">
             <ul class="vehicle_listing">
             <li>
-                @foreach($tblvehicles as $tblvehicle)
-                <div class="vehicle_img"><a href="{{ route('vehicle-details')}}?vhid=<?php echo htmlentities($tblvehicle->id);?>"><img src="{{url('images/Adminimages/vehicleimages/'.$tblvehicle->Vimage1)}}" alt="image"></a> </div>
+                @foreach($tblbookings as $tblbooking)
+                <div class="vehicle_img"><a href="{{ route('vehicle-details')}}?vhid=<?php echo htmlentities($tblbooking->id);?>"><img src="{{url('images/Adminimages/vehicleimages/'.$tblbooking->Vimage1)}}" alt="image"></a> </div>
                 <div class="vehicle_title">
-                  <h6>@foreach($tblvehicle->brands as $brand) <a href="{{ route('vehicle-details')}}?vhid=<?php echo htmlentities($brand->id);?>"><?php echo htmlentities($brand->BrandName);?>@endforeach ,<?php echo htmlentities($tblvehicle->VehiclesTitle);?></a></h6>
-                  @foreach($tblvehicle->bookings as $booking)
-                  <p><b>From Date:</b> <?php echo htmlentities($booking->FromDate);?><br/><b>To Date:</b> <?php echo htmlentities($booking->ToDate);?></p>
+                  <h6><a href="{{ route('vehicle-details')}}?vhid=<?php echo htmlentities($tblbooking->id);?>"><?php echo htmlentities($tblbooking->BrandName);?>,<?php echo htmlentities($tblbooking->VehiclesTitle);?></a></h6>
+                  <p><b>From Date:</b> <?php echo htmlentities($tblbooking->FromDate);?><br/><b>To Date:</b> <?php echo htmlentities($tblbooking->ToDate);?></p>
                 </div>
-                <?php if($booking->Status==1)
+                <?php if($tblbooking->status==1)
                 { ?>
                 <div class="vehicle_status"> <a href="#" class="btn outline btn-xs active-btn">Confirmed</a>
                            <div class="clearfix"></div>
         </div>
 
-              <?php } else if($booking->Status==2) { ?>
+              <?php } else if($tblbooking->status==2) { ?>
  <div class="vehicle_status"> <a href="#" class="btn outline btn-xs">Cancelled</a>
             <div class="clearfix"></div>
         </div>
@@ -69,11 +68,11 @@
             <div class="clearfix"></div>
         </div>
                 <?php } ?>
-       <div style="float: left"><p><b>Message:</b> <?php echo htmlentities($booking->message);?> </p></div>
+       <div style="float: left"><p><b>Message:</b> <?php echo htmlentities($tblbooking->messages);?> </p></div>
        @endforeach
             </li>
 
-       @endforeach
+
 
 
             </ul>

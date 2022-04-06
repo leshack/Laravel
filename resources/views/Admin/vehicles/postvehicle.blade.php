@@ -70,11 +70,11 @@
             <label>Select Brand<span style="color:red">*</span></label>
             <select class="form-control select2 select2-purple" style="width: 100%;" name="VehiclesBrands" >
                 <option selected="selected"> Select </option>
-                @foreach($tblvehicles as $tblvehicle)
-                     @foreach($tblvehicle->brands as $brand)
+
+                     @foreach($brands as $brand)
                 <option value="<?php echo htmlentities($brand->id);?>"><?php echo htmlentities($brand->BrandName);?></option>
                      @endforeach
-                @endforeach
+
           </select>
           <span class="text-danger error-text VehiclesBrands_error"></span>
         </div>
@@ -209,19 +209,19 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                        <div class="checkbox checkbox-inline">
+                        <div class=" checkbox-inline">
                         <input type="checkbox" id="AirConditioner" name="AirConditioner" value="1">
                         <label for="AirConditioner"> Air Conditioner </label>
                         </div>
                 </div>
                 <div class="form-group">
-                        <div class="checkbox checkbox-inline">
+                        <div class=" checkbox-inline">
                         <input type="checkbox" id="PowerSteering" name="PowerSteering" value="1">
                         <label for="PowerSteering"> Power Steering </label>
                         </div>
                 </div>
                 <div class="form-group">
-                        <div class="checkbox checkbox-inline">
+                        <div class=" checkbox-inline">
                             <input type="checkbox" id="CDPlayer" name="CDPlayer" value="1">
                             <label for="CDPlayer"> CD Player </label>
                         </div>
@@ -230,7 +230,7 @@
               <!-- /.col -->
               <div class="col-md-6">
                 <div class="form-group">
-                        <div class="checkbox checkbox-inline">
+                        <div class=" checkbox-inline">
                         <input type="checkbox" id="PowerDoorLocks" name="PowerDoorLocks" value="1">
                         <label for="PowerDoorLocks"> Power Door Locks </label>
                         </div>
@@ -238,13 +238,13 @@
 
                 <!-- /.form-group -->
                 <div class="form-group">
-                        <div class="checkbox checkbox-inline">
+                        <div class=" checkbox-inline">
                         <input type="checkbox" id="DriverAirbag" name="DriverAirbag" value="1">
                         <label for="DriverAirbag">Driver Airbag</label>
                         </div>
                 </div>
                 <div class="form-group">
-                        <div class="checkbox checkbox-inline">
+                        <div class=" checkbox-inline">
                             <input type="checkbox" id="CentralLocking" name="CentralLocking" value="1">
                             <label for="CentralLocking">Central Locking</label>
                         </div>
@@ -260,19 +260,19 @@
             <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-                <div class="checkbox checkbox-inline">
+                <div class=" checkbox-inline">
                 <input type="checkbox" id="AntiLockBrakingSystem" name="AntiLockBrakingSystem" value="1">
                 <label for="AntiLockBrakingSystem"> AntiLock Braking System </label>
                 </div>
             </div>
             <div class="form-group">
-                <div class="checkbox checkbox-inline">
+                <div class=" checkbox-inline">
                     <input type="checkbox" id="PassegerAirbag" name="PassegerAirbag" value="1">
                     <label for="PassegerAirbag"> Passenger Airbag </label>
                 </div>
             </div>
             <div class="form-group">
-                <div class="checkbox checkbox-inline">
+                <div class=" checkbox-inline">
                     <input type="checkbox" id="CrashSensor" name="CrashSensor" value="1">
                     <label for="CrashSensor"> Crash Sensor </label>
                 </div>
@@ -280,19 +280,19 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <div class="checkbox checkbox-inline">
+                <div class=" checkbox-inline">
                     <input type="checkbox" id="BrakeAssit" name="BrakeAssit" value="1">
                     <label for="BrakeAssit"> Brake Assist </label>
                 </div>
             </div>
             <div class="form-group">
-                    <div class="checkbox checkbox-inline">
+                    <div class=" checkbox-inline">
                         <input type="checkbox" id="PowerWindows" name="PowerWindows" value="1">
                         <label for="PowerWindows"> Power Windows </label>
                     </div>
             </div>
             <div class="form-group">
-                    <div class="checkbox checkbox-inline">
+                    <div class=" checkbox-inline">
                         <input type="checkbox" id="LeatherSeats" name="LeatherSeats" value="1">
                         <label for="LeatherSeats"> Leather Seats </label>
                     </div>
@@ -306,10 +306,10 @@
 
           </div>
           {{-- buttons --}}
-          <div class="row justify-content-center">
-            <div class="col-md-6 " >
-      <div class="form-group">
-        <div class="col-sm-8 col-sm-offset-2">
+          <div class="row row d-flex justify-content-center align-content-center">
+            <div class=" text-center" >
+    <div class="form-group">
+        <div class=" text-center">
             <button class="btn btn-default" type="reset">Cancel</button>
             <button class="btn btn-primary" name="submit" type="submit">Save</button>
         </div>

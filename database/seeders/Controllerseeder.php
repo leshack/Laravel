@@ -26,5 +26,8 @@ class Controllerseeder extends Seeder
             DB::statement($sql);
             $sql = file_get_contents(database_path() . '/schema/admin.sql');
             DB::statement($sql);
+            DB::statement($sql);
+            $sql = file_get_contents(database_path() . '/schema/countactus.sql');
+            DB::statement($sql);
     }
 }

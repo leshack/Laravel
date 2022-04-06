@@ -68,11 +68,11 @@
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->phone}}</td>
-                                <td>{{$user->Dob}}</td>
+                                <td>{{date('jS M Y', strtotime($user->Dob))}}</td>
                                 <td>{{$user->address}}</td>
                                 <td>{{$user->city}}</td>
                                 <td>{{$user->country}}</td>
-                                <td>{{$user->RegDate}}</td>
+                                <td>{{date('jS M Y', strtotime($user->RegDate))}}</td>
 
                             </tr>
                         @endforeach

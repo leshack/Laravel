@@ -63,7 +63,7 @@
                                 <td>{{$testimonial->name}}</td>
                                 <td>{{$testimonial->email}}</td>
                                 <td>{{$testimonial->Testimonial}}</td>
-                                <td>{{$testimonial->created_at}}</td>
+                                <td>{{date('jS M Y', strtotime($testimonial->created_at))}}</td>
                                 <td>
                                     <input type="checkbox" data-id="{{ $testimonial->id}}" name="status" class="js-switch" {{ $testimonial->status == 1 ? 'checked' : '' }}>
                                 </td>

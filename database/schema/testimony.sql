@@ -1,3 +1,11 @@
-INSERT INTO `tbltestimonial` (`id`, `user_id`, `email`, `Testimonial`, `PostingDate`, `status`) VALUES
-(1,1 ,'lesleytulienge@strathmore.edu', 'Test Test', '2017-06-18 07:44:31', 1),
-(2,2, 'zoline@gmail.com', '\nLorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam nibh. Nunc varius facilis', '2017-06-18 07:46:05', 1);
+--
+-- Dumping data for table `tbltestimonial`
+--
+
+INSERT INTO `tbltestimonial` (`id`, `email`, `Testimonial`, `status`, `PostingDate`, `created_at`, `updated_at`) VALUES
+(1, 'kesleytulienge@gmail.com', 'Nothing cames to save your Day like Car-Hoonicorn', 1, '2022-01-18 04:44:31', '2022-03-29 09:18:49', NULL),
+(2, 'kesleytulienge@gmail.com', 'Untill you get your hands on this products, You will now what it means to be a good traveller', 1, '2022-01-18 04:46:05', '2022-03-29 09:18:49', NULL);
+
+--
+-- Indexes for dumped tables
+--

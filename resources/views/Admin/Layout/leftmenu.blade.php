@@ -102,7 +102,7 @@
               <i class="nav-icon fas fa-book"></i>
               <p>
               Manage Bookings
-              <span class="right badge badge-warning right">100</span>
+              <span class="right badge badge-warning right">5</span>
               </p>
             </a>
           </li>
@@ -154,7 +154,7 @@
               <i class="nav-icon fas fa-users"></i>
               <p>
               Registered Users
-              <span class="right badge badge-info right">1000</span>
+              <span class="right badge badge-info right">100</span>
               </p>
             </a>
           </li>

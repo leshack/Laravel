@@ -41,10 +41,12 @@
           <h5 class="uppercase underline">My Testimonials </h5>
           <div class="my_vehicles_list">
             <ul class="vehicle_listing">
-            <li>
-            <div>
                 @foreach($tbltestimonial as $tbltestimony)
-                <p><?php echo htmlentities($tbltestimony->Testimonial);?> </p>
+            <li>
+
+            <div>
+
+                <p><?php echo htmlentities($tbltestimony->Testimonial);?></p>
                 <p><b>Posting Date:</b><?php echo htmlentities($tbltestimony->PostingDate);?> </p>
 
                 <?php if($tbltestimony->status==1){ ?>
@@ -56,9 +58,11 @@
                         <div class="clearfix"></div>
                         </div>
                 <?php } ?>
-                @endforeach
+
             </div>
+
          </li>
+         @endforeach
        </ul>
      </div>
    </div>
