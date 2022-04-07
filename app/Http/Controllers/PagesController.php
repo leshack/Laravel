@@ -13,7 +13,13 @@ class PagesController extends Controller
 {
     public function index($tid=1)
     {
-        $tblvehicles = Vehicle::with(['brands.vehicle',/*'brands:id'*/])->get();
+        $tblvehicles = DB::table("tblvehicles")
+        ->join("tblbrands", function($join){
+            $join->on("tblbrands.id", "=", "tblvehicles.VehiclesBrand");
+        })
+        ->select("tblvehicles.VehiclesTitle", "tblbrands.BrandName","tblvehicles.PricePerDay", "tblvehicles.FuelType", "tblvehicles.ModelYear", "tblvehicles.id", "tblvehicles.SeatingCapacity", "tblvehicles.VehiclesOverview", "tblvehicles.Vimage1")
+        ->get();
+
         $tbltestimonial = DB::table("tbltestimonial")
         ->join("users", function($join){
             $join->on("tbltestimonial.email", "=", "users.email");
@@ -21,6 +27,7 @@ class PagesController extends Controller
         ->select("tbltestimonial.Testimonial", "users.name")
         ->where("tbltestimonial.status", "=", $tid)
         ->get();
+
         $tblbookings = Bookings::with(['user.bookings'])->get();
         return view('index',compact('tblvehicles','tbltestimonial','tblbookings'))
             ->with('tblvehicles', $tblvehicles)->with('tbltestimonial', $tbltestimonial)
@@ -30,7 +37,13 @@ class PagesController extends Controller
     public function vehicledetails()
     {
         $vhid=intval($_GET['vhid']);
-        $tblvehicles = Vehicle::with(['brands.vehicle',/*'brands:id'*/])->where('id', $vhid)->get();
+        $tblvehicles = DB::table("tblvehicles")
+        ->join("tblbrands", function($join){
+            $join->on("tblbrands.id", "=", "tblvehicles.VehiclesBrand");
+        })
+        ->select("tblvehicles.*", "tblbrands.BrandName", "tblbrands.id as bid")
+        ->where("tblvehicles.id", "=", $vhid)
+        ->get();
         $tbltestimonial = Testimonial::with(['user.testimonial','user:name'])->get();
         $tblbookings = Bookings::with(['user.bookings'])->get();
         return view('includes.vehicle-details',compact('tblvehicles','tbltestimonial','tblbookings'))
@@ -40,11 +53,15 @@ class PagesController extends Controller
     }
     public function carlisting()
     {
-        $tblvehicles = Vehicle::with(['brands.vehicle',/*'brands:id'*/])->get();
-        $tbltestimonial = Testimonial::with(['user.testimonial','user:name'])->get();
+        $tblvehicles = DB::table("tblvehicles")
+        ->join("tblbrands", function($join){
+            $join->on("tblbrands.id", "=", "tblvehicles.VehiclesBrand");
+        })
+        ->select("tblvehicles.*", "tblbrands.BrandName", "tblbrands.id as bid")
+        ->get();
         $tblbookings = Bookings::with(['user.bookings'])->get();
-        return view('includes.car-listing',compact('tblvehicles','tbltestimonial','tblbookings'))
-            ->with('tblvehicles', $tblvehicles)->with('tbltestimonial', $tbltestimonial)
+        return view('includes.car-listing',compact('tblvehicles','tblbookings'))
+            ->with('tblvehicles', $tblvehicles)
             ->with('tblbookings', $tblbookings);
 
     }
@@ -73,5 +90,13 @@ class PagesController extends Controller
             'pages' => $pages,
             // 'type' => $type
         ]);
+    }
+
+    public function updatepage(Request $request)
+    {
+        DB::table('tblpages')->where("type", "=", $request['type'])->update([
+                'detail' =>$request['summernote']
+        ]);
+        return back()->with('success', 'page successfully updated');
     }
 }

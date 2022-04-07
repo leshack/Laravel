@@ -64,7 +64,7 @@
                 <div class="">
                     <?php
 
-                    switch($_GET['type'])
+                    switch(isset($_GET['type']))
                     {
                         case "terms" :
                             echo "Terms and Conditions";
@@ -102,10 +102,13 @@
                         </h3>
                     </div>
                     <!-- /.card-header -->
+                    <form action = "{{ route('admin.updatepage') }}" method="post">
+                        @csrf
+
                     <div class="card-body">
-                        <textarea id="summernote">
+                        <textarea id="summernote" name="summernote">
                             @foreach ($pages as  $page)
-                        <div id="summernote">{{$page->detail }}</div>
+                        <div id="summernote" name="summernote">{{$page->detail }}</div>
                             @endforeach
                         </textarea>
                     </div>
@@ -117,6 +120,7 @@
                             <button class="btn btn-primary" name="submit" type="submit">update page</button>
                         </div>
                     </div>
+                </form>
                 </div>
                         </div>
                     <div class="card-footer">

@@ -29,11 +29,11 @@
     <div class="container">
       <div class="listing_detail_head row">
         <div class="col-md-9">
-          <h2> @foreach($tblvehicle->brands as $brand)<?php echo htmlentities($brand->BrandName);?> @endforeach , <?php echo htmlentities($tblvehicle->VehiclesTitle);?></h2>
+          <h2> <?php echo htmlentities($tblvehicle->BrandName);?> , <?php echo htmlentities($tblvehicle->VehiclesTitle);?></h2>
         </div>
         <div class="col-md-3">
           <div class="price_info">
-            <p>$<?php echo htmlentities($tblvehicle->PricePerDay);?> </p>Per Day
+            <p>Ksh<?php echo htmlentities($tblvehicle->PricePerDay);?> </p>Per Day
 
           </div>
         </div>
@@ -280,8 +280,8 @@
               <div class="product-listing-img"> <a href="{{ route('vehicle-details')}}?vhid=<?php echo htmlentities($tblvehicle->id);?>"><img src="{{url('images/Adminimages/vehicleimages/'.$tblvehicle->Vimage1)}}" class="img-responsive" alt="image" /> </a>
               </div>
               <div class="product-listing-content">
-                <h5> @foreach($tblvehicle->brands as $brand) <a href="{{ route('vehicle-details')}}?vhid=<?php echo htmlentities($brand->id);?>"><?php echo htmlentities($brand->BrandName);?> @endforeach , <?php echo htmlentities($tblvehicle->VehiclesTitle);?></a></h5>
-                <p class="list-price">$<?php echo htmlentities($tblvehicle->PricePerDay);?></p>
+                <h5> <a href="{{ route('vehicle-details')}}?vhid=<?php echo htmlentities($tblvehicle->id);?>"><?php echo htmlentities($tblvehicle->BrandName);?> , <?php echo htmlentities($tblvehicle->VehiclesTitle);?></a></h5>
+                <p class="list-price">ksh<?php echo htmlentities($tblvehicle->PricePerDay);?></p>
 
                 <ul class="features_list">
 

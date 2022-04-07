@@ -69,12 +69,10 @@
         <div class="form-group">
             <label>Select Brand<span style="color:red">*</span></label>
             <select class="form-control select2 select2-purple" style="width: 100%;" name="VehiclesBrands" >
-                <option value="<?php echo htmlentities($vehicle->bid);?>"><?php echo htmlentities($vehicle->brandname); ?> </option>
-                @foreach($tblvehicles as $tblvehicle)
-                    @foreach($tblvehicle->brands as $brand)
-                <option value="<?php echo htmlentities($brand->id);?>"><?php echo htmlentities($brand->BrandName);?></option>
-                    @endforeach
-                @endforeach
+                <option value="<?php echo htmlentities($vehicle->bid);?>"><?php echo htmlentities($vehicle->BrandName); ?> </option>
+
+                <option value="<?php echo htmlentities($vehicle->id);?>"><?php echo htmlentities($vehicle->BrandName);?></option>
+
           </select>
           <span class="text-danger error-text VehiclesBrands_error"></span>
         </div>

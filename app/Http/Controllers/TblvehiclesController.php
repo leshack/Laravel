@@ -198,13 +198,12 @@ class TblvehiclesController extends Controller
         ->join("tblbrands", function($join){
             $join->on("tblbrands.id", "=", "tblvehicles.VehiclesBrand");
         })
-        ->select("tblvehicles.*", "tblbrands.brandname", "tblbrands.id as bid")
+        ->select("tblvehicles.*", "tblbrands.BrandName", "tblbrands.id as bid")
         ->where("tblvehicles.id", "=", $id)
         ->get();
-        $tblvehicles = Vehicle::with(['brands.vehicle',/*'brands:id'*/])->get();
         return view('Admin.vehicles.updatevehicle')
                 ->with('vehicle',$vehicle)
-                ->with('tblvehicles', $tblvehicles);
+                ;
     }
 
     /**

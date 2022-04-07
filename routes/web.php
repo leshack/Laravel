@@ -107,6 +107,8 @@ Route::group(['prefix' => 'admin','middleware' => ['adminauth',]], function () {
 
     Route::get('users',[RegusersController::class,'regusers'])->name('admin.regusers');
     Route::get('pages',[PagesController::class,'managepage'])->name('admin.managepage');
+    Route::post('pages',[PagesController::class,'updatepage'])->name('admin.updatepage');
+
     Route::get('contact',[TblcontactusinfoController::class,'contact'])->name('admin.contact');
     Route::get('subscriber',[TblsubscribersController::class,'subscriber'])->name('admin.subscriber');
                         //profile

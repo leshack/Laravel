@@ -53,7 +53,7 @@
 									<input type="text" placeholder="username" name="Username" class="form-control mb">
 
 									<label for="" class="text-uppercase text-sm">Password</label>
-									<input type="text" placeholder="password" name="password" class="form-control mb">
+									<input type="password" placeholder="password" name="password" class="form-control mb">
 
 
 

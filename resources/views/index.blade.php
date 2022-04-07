@@ -54,7 +54,7 @@
         </ul>
         </div>
         <div class="car-title-m">
-        <h6> @foreach($tblvehicle->brands as $brand) <a href="{{ route('vehicle-details')}}?vhid=<?php echo htmlentities($brand->id);?>"><?php echo htmlentities($brand->BrandName);?>  @endforeach ,<?php echo htmlentities($tblvehicle->VehiclesTitle);?></a></h6>
+        <h6><a href="{{ route('vehicle-details')}}?vhid=<?php echo htmlentities($tblvehicle->id);?>"><?php echo htmlentities($tblvehicle->BrandName);?>,<?php echo htmlentities($tblvehicle->VehiclesTitle);?></a></h6>
         <span class="price"><?php echo htmlentities($tblvehicle->PricePerDay);?> Ksh/Day</span>
         </div>
         <div class="inventory_info_m">

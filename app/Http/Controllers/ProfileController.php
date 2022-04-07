@@ -132,7 +132,7 @@ class ProfileController extends Controller
 
         ]);
 
-        if($validator->fails()){
+        if(!$validator->fails()){
             return response()->json(['status'=>0,'error'=>$validator->errors()->toArray()]);
         }else{
              $query = User::find(Auth::user()->id)->update([
@@ -231,14 +231,13 @@ class ProfileController extends Controller
 
     public function  testimony(Request $request) {
         $this->validate($request, [
-            'email'=> 'email|unique:users,email,'.Auth::user()->id,
+            'email'=> 'email|unique:users,email,'.Auth::user()->email,
             'Testimonial'=>'required', 'string', 'max:200',
-            'user_id' => 'string','numeric'.Auth::user()->id
+
         ]);
         $testimonial = new Testimonial;
-        $testimonial->email =$request->email.Auth::user()->id;
+        $testimonial->email =$request->email.Auth::user()->email;
         $testimonial->Testimonial = $request->Testimonial;
-        $testimonial->user_id =$request->user_id.Auth::user()->id;
 
         $testimonial->save();
 
@@ -247,18 +246,18 @@ class ProfileController extends Controller
 
     public function  booking(Request $request) {
         $this->validate($request, [
-            'email'=> 'email|unique:users,email,'.Auth::user()->id,
+            'email'=> 'email|unique:users,email,'.Auth::user()->email,
             'FromDate'=>'required','string',
             'ToDate'=>'required','string',
             'message'=>'required', 'string', 'max:200',
-            'user_id' => 'string','numeric'.Auth::user()->id
+
         ]);
         $bookings = new Bookings;
-        $bookings->email =$request->email.Auth::user()->id;
+        $bookings->email =$request->email.Auth::user()->email;
         $bookings->FromDate =$request->FromDate;
         $bookings->ToDate =$request->ToDate;
         $bookings->messages =$request->message;
-        $bookings->user_id =$request->user_id.Auth::user()->id;
+
 
         $bookings->save();
 

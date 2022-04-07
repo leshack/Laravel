@@ -37,7 +37,7 @@
             <div class="product-listing-img"><img src="{{url('images/Adminimages/vehicleimages/'.$tblvehicle->Vimage1)}}" class="img-responsive" alt="Image" /> </a>
             </div>
             <div class="product-listing-content">
-              <h5><a href="{{ route('vehicle-details')}}?vhid=<?php echo htmlentities($tblvehicle->id);?>">@foreach($tblvehicle->brands as $brand)<?php echo htmlentities($brand->BrandName);?> @endforeach, <?php echo htmlentities($tblvehicle->VehiclesTitle);?></a></h5>
+              <h5><a href="{{ route('vehicle-details')}}?vhid=<?php echo htmlentities($tblvehicle->id);?>"><?php echo htmlentities($tblvehicle->BrandName);?>, <?php echo htmlentities($tblvehicle->VehiclesTitle);?></a></h5>
               <p class="list-price"><?php echo htmlentities($tblvehicle->PricePerDay);?> Ksh Per/Day</p>
               <ul>
                 <li><i class="fa fa-user" aria-hidden="true"></i><?php echo htmlentities($tblvehicle->SeatingCapacity);?> seats</li>
@@ -62,7 +62,7 @@
                         <div class="form-group select">
                         <select class="form-control" name="brand">
                             <option>Select Brand</option>
-                            <option value="<?php echo htmlentities($tblvehicle->id);?>">@foreach($tblvehicle->brands as $brand)<?php echo htmlentities($brand->BrandName);?> @endforeach</option>
+                            <option value="<?php echo htmlentities($tblvehicle->id);?>"><?php echo htmlentities($tblvehicle->BrandName);?></option>
                                             </select>
                                             </div>
                                             <div class="form-group select">
@@ -89,7 +89,7 @@
                     <ul>
                         <li class="gray-bg">
                         <div class="recent_post_img"> <a href="{{ route('vehicle-details')}}?vhid=<?php echo htmlentities($tblvehicle->id);?>"><img src="{{url('images/Adminimages/vehicleimages/'.$tblvehicle->Vimage1)}}" alt="image"></a> </div>
-                        <div class="recent_post_title"> <a href="{{ route('vehicle-details')}}?vhid=<?php echo htmlentities($tblvehicle->id);?>">@foreach($tblvehicle->brands as $brand)<?php echo htmlentities($brand->BrandName);?> @endforeach, <?php echo htmlentities($tblvehicle->VehiclesTitle);?></a>
+                        <div class="recent_post_title"> <a href="{{ route('vehicle-details')}}?vhid=<?php echo htmlentities($tblvehicle->id);?>"><?php echo htmlentities($tblvehicle->BrandName);?>, <?php echo htmlentities($tblvehicle->VehiclesTitle);?></a>
                             <p class="widget_price">$<?php echo htmlentities($tblvehicle->PricePerDay);?> Per Day</p>
                         </div>
                         </li>
