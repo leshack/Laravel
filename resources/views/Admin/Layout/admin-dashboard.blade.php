@@ -60,9 +60,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <div class="wrapper">
 
     <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
+  {{-- <div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__shake" src="{{ url('dist/img/AdminLTELogo.png') }}" alt="AdminLTELogo" height="60" width="60">
-  </div>
+  </div> --}}
 
     {{-- 1. Top menu --}}
     @include('Admin.Layout.topmenu')
@@ -365,7 +365,7 @@ $(function () {
       /* UPDATE USER PERSONAL INFO */
       $('#form').on('submit',function(e){
          e.preventDefault();
-        //  alert('hi');
+        //    alert('hi');
          var form = this;
          $.ajax({
             url:$(form).attr('action'),

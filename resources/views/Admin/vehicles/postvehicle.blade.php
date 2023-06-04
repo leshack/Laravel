@@ -311,7 +311,7 @@
     <div class="form-group">
         <div class=" text-center">
             <button class="btn btn-default" type="reset">Cancel</button>
-            <button class="btn btn-primary" name="submit" type="submit">Save</button>
+            <button class="btn btn-primary" name="addvehicle" type="submit">Save</button>
         </div>
     </div>
 </div>

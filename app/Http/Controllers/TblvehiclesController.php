@@ -84,7 +84,7 @@ class TblvehiclesController extends Controller
             'Vimage5.image' => 'Vehicle file must be an image',
 
         ]);
-        if($validator->fails()){
+        if(!$validator->fails()){
             return response()->json(['status'=>0,'error'=>$validator->errors()->toArray()]);
         }else{
             if($request->hasFile("Vimage1")){
@@ -123,9 +123,9 @@ class TblvehiclesController extends Controller
                 //    $upload = $file->storeAs($path, $file_name);
                 $upload4 = $file->storeAs($path, $file_name5, 'public');
             }
-             if($upload){
+             if($upload && $upload1 && $upload2 && $upload3 && $upload4){
 
-                Vehicle::create([
+                $vehicleData = [
                     'VehiclesTitle' => $request->VehiclesTitle,
                     'VehiclesBrand' => $request->VehiclesBrand,
                     'VehiclesOverview' => $request->VehiclesOverview,
@@ -150,7 +150,10 @@ class TblvehiclesController extends Controller
                     'CentralLocking' => $request->CentralLocking,
                     'CrashSensor' => $request->CrashSensor,
                     'LeatherSeats' => $request->LeatherSeats,
-                ]);
+                ];
+
+                Vehicle::create($vehicleData);
+
                 return response()->json(['status'=>1,'msg'=>'New Vehicle has been saved successfully']);
              }
 

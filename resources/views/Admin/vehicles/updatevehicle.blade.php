@@ -34,9 +34,10 @@
   <!-- Main content -->
 <section class="content">
 <div class="container-fluid">
-<form  class="form-horizontal" method="POST" action="#" enctype="multipart/form-data" id="form">
+  @foreach($vehicle as $vehicle)
+<form  class="form-horizontal" method="POST" id="form" action="{{URL::to('admin/managevehicles/update/'.$vehicle->id)}}" enctype="multipart/form-data" >
     @csrf
-    @foreach($vehicle as $vehicle)
+
  <div class="row">
      <!-- general form elements -->
     <div class="col-md-12">
@@ -411,7 +412,7 @@
     <div class="form-group">
         <div class=" text-center">
             <button class="btn btn-default" type="reset">Cancel</button>
-            <button class="btn btn-primary" name="submit" type="submit">Save</button>
+            <button class="btn btn-primary" name="update" type="submit">Save</button>
         </div>
     </div>
 </div>
