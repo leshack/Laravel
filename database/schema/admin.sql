@@ -2,7 +2,7 @@
 -- Dumping data for table `admins`
 --
 
-INSERT INTO `admins` (`id`, `Username`, `password`, `created_at`, `updated_at`) VALUES
-(1, 'leshack98', '$2a$12$jZ4qBIw6USXLgBJCr1JDleCG.uk.c8y6xVbSn3TlaKr5SkT0TVH4e', '2022-02-19 17:47:54', '2022-02-16 16:53:38');
+INSERT INTO `admins` (`id`, `Username`, `password`, `email`, `picture`, `skills`, `created_at`, `updated_at`) VALUES
+(1, 'leshack98', '$2y$10$ucb.zr5nxt.AJp6dHAWQS.cUZaMksvF9mo5J4sKHSZHpFf5WzImaq', 'leshack98@gmail.com', 'UIMG_20221216639bc50e347ba.jpg', NULL, '2022-02-19 14:47:54', '2022-12-15 22:08:30');
 
 -- --------------------------------------------------------
